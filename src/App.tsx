@@ -12,6 +12,7 @@ import { AchievementValley } from './components/biomes/AchievementValley'
 import { HiddenCave } from './components/biomes/HiddenCave'
 import { NightSky } from './components/biomes/NightSky'
 import { useAudio } from './hooks/useAudio'
+import { preloadAdventureAssets } from './lib/preload'
 import './App.css'
 
 type SkyPhase = 'hero' | 'day' | 'cave' | 'night'
@@ -38,6 +39,11 @@ function App() {
   const [started, setStarted] = useState(false)
   const [phase, setPhase] = useState<SkyPhase>('hero')
   const { muted, start, toggleMute, setMode } = useAudio()
+
+  // If session already unlocked, still warm assets ASAP
+  useEffect(() => {
+    preloadAdventureAssets()
+  }, [])
 
   const begin = useCallback(() => {
     void start()

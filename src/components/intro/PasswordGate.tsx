@@ -1,5 +1,6 @@
-import { useState, type FormEvent } from 'react'
+import { useState, useEffect, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { preloadAdventureAssets } from '../../lib/preload'
 import './PasswordGate.css'
 
 const PASSWORD = '8====D'
@@ -13,6 +14,10 @@ export function PasswordGate({ onUnlock }: Props) {
   const [value, setValue] = useState('')
   const [error, setError] = useState(false)
   const [shaking, setShaking] = useState(false)
+
+  useEffect(() => {
+    preloadAdventureAssets()
+  }, [])
 
   function submit(e: FormEvent) {
     e.preventDefault()
