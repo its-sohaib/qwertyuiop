@@ -7,7 +7,7 @@ import {
   TILE,
   BIOMES,
 } from '../../game/world'
-import { drawPlayer, drawWorld } from '../../game/render'
+import { drawInteractable, drawPlayer, drawWorld, drawWorldFX } from '../../game/render'
 import type { HotbarItem, Interactable } from '../../game/types'
 import { useGameInput } from '../../game/useGameInput'
 import { useAudio } from '../../hooks/useAudio'
@@ -23,7 +23,13 @@ type Props = {
   active: boolean
 }
 
-const SPEED = 3.6
+const SPEED = 3.4
+
+function getZoom(w: number) {
+  if (w < 420) return 1.45
+  if (w < 720) return 1.28
+  return 1
+}
 
 export function Game({ active }: Props) {
   const world = useMemo(() => createWorld(), [])
@@ -37,6 +43,7 @@ export function Game({ active }: Props) {
   const last = useRef(0)
   const openedRef = useRef(false)
   const discoveredRef = useRef(new Set<string>())
+  const timeRef = useRef(0)
 
   const { state, setVirtual, takeInteract, pulseInteract } = useGameInput(active)
   const { playDing, playSparkle, playChest, setMode } = useAudio()
@@ -49,11 +56,18 @@ export function Game({ active }: Props) {
   const [discoveredCount, setDiscoveredCount] = useState(0)
   const [hotbar, setHotbar] = useState<HotbarItem[]>([])
   const [toast, setToast] = useState<string | null>(null)
+  const [hintVisible, setHintVisible] = useState(true)
   const viewport = useRef({ w: window.innerWidth, h: window.innerHeight })
 
   useEffect(() => {
     openedRef.current = Boolean(opened)
   }, [opened])
+
+  useEffect(() => {
+    if (!active) return
+    const t = window.setTimeout(() => setHintVisible(false), 7000)
+    return () => window.clearTimeout(t)
+  }, [active])
 
   useEffect(() => {
     const c = document.createElement('canvas')
@@ -82,6 +96,7 @@ export function Game({ active }: Props) {
 
   const handleOpen = useCallback((item: Interactable) => {
     setOpened(item)
+    setHintVisible(false)
     const first = !discoveredRef.current.has(item.id)
 
     if (item.kind === 'chest' || item.id === 'treasure') sfx.current.playChest()
@@ -114,6 +129,7 @@ export function Game({ active }: Props) {
     function frame(t: number) {
       const dt = Math.min(0.05, (t - (last.current || t)) / 1000)
       last.current = t
+      timeRef.current += dt
 
       const input = state.current
       let dx = 0
@@ -140,12 +156,15 @@ export function Game({ active }: Props) {
       }
 
       const { w: vw, h: vh } = viewport.current
+      const zoom = getZoom(vw)
+      const viewW = vw / zoom
+      const viewH = vh / zoom
       const worldW = world.width * TILE
       const worldH = world.height * TILE
-      let cx = pos.current.x * TILE - vw / 2
-      let cy = pos.current.y * TILE - vh / 2
-      cx = Math.max(0, Math.min(cx, Math.max(0, worldW - vw)))
-      cy = Math.max(0, Math.min(cy, Math.max(0, worldH - vh)))
+      let cx = pos.current.x * TILE - viewW / 2
+      let cy = pos.current.y * TILE - viewH / 2
+      cx = Math.max(0, Math.min(cx, Math.max(0, worldW - viewW)))
+      cy = Math.max(0, Math.min(cy, Math.max(0, worldH - viewH)))
       cam.current.x += (cx - cam.current.x) * Math.min(1, dt * 8)
       cam.current.y += (cy - cam.current.y) * Math.min(1, dt * 8)
 
@@ -159,7 +178,6 @@ export function Game({ active }: Props) {
         openRef.current(near)
       }
 
-      // Achievements pop when you walk up on them (minecraft energy)
       if (near?.kind === 'achievement' && !discoveredRef.current.has(near.id) && !openedRef.current) {
         openRef.current(near)
       }
@@ -169,46 +187,62 @@ export function Game({ active }: Props) {
       if (canvas && baked) {
         const ctx = canvas.getContext('2d')
         if (ctx) {
-          if (canvas.width !== vw || canvas.height !== vh) {
-            canvas.width = vw
-            canvas.height = vh
+          const dpr = Math.min(window.devicePixelRatio || 1, 2)
+          const bw = Math.floor(vw * dpr)
+          const bh = Math.floor(vh * dpr)
+          if (canvas.width !== bw || canvas.height !== bh) {
+            canvas.width = bw
+            canvas.height = bh
+            canvas.style.width = `${vw}px`
+            canvas.style.height = `${vh}px`
           }
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
           ctx.imageSmoothingEnabled = false
-          ctx.fillStyle = '#0c0618'
+          ctx.fillStyle = '#070312'
           ctx.fillRect(0, 0, vw, vh)
-          ctx.drawImage(baked, cam.current.x, cam.current.y, vw, vh, 0, 0, vw, vh)
+          ctx.drawImage(baked, cam.current.x, cam.current.y, viewW, viewH, 0, 0, vw, vh)
 
+          // Scale FX/entities into zoomed screen space
+          ctx.save()
+          ctx.scale(zoom, zoom)
+          drawWorldFX(
+            ctx,
+            world.tiles,
+            world.width,
+            world.height,
+            TILE,
+            cam.current.x,
+            cam.current.y,
+            viewW,
+            viewH,
+            timeRef.current,
+          )
+
+          let i = 0
           for (const item of world.interactables) {
             const ix = item.x * TILE + TILE * 0.5 - cam.current.x
             const iy = item.y * TILE + TILE * 0.5 - cam.current.y
-            if (ix < -48 || iy < -48 || ix > vw + 48 || iy > vh + 48) continue
-            const found = discoveredRef.current.has(item.id)
-            const highlight = near?.id === item.id
-
-            ctx.fillStyle = found ? 'rgba(78,207,154,0.4)' : 'rgba(245,199,106,0.4)'
-            ctx.beginPath()
-            ctx.ellipse(ix, iy + 12, 16, 7, 0, 0, Math.PI * 2)
-            ctx.fill()
-
-            if (highlight) {
-              ctx.strokeStyle = 'rgba(255,228,160,0.9)'
-              ctx.lineWidth = 2
-              ctx.setLineDash([4, 3])
-              ctx.strokeRect(ix - 20, iy - 30, 40, 40)
-              ctx.setLineDash([])
+            if (ix < -48 || iy < -48 || ix > viewW + 48 || iy > viewH + 48) {
+              i++
+              continue
             }
-
-            ctx.font = '24px serif'
-            ctx.textAlign = 'center'
-            ctx.textBaseline = 'middle'
-            ctx.globalAlpha = found ? 0.65 : 1
-            ctx.fillText(item.emoji, ix, iy - 8)
-            ctx.globalAlpha = 1
+            drawInteractable(
+              ctx,
+              ix,
+              iy,
+              item.emoji,
+              discoveredRef.current.has(item.id),
+              near?.id === item.id,
+              timeRef.current,
+              i,
+            )
+            i++
           }
 
           const screenTileX = pos.current.x - cam.current.x / TILE
           const screenTileY = pos.current.y - cam.current.y / TILE
           drawPlayer(ctx, screenTileX, screenTileY, TILE, facing.current, walkFrame.current)
+          ctx.restore()
         }
       }
 
@@ -232,6 +266,7 @@ export function Game({ active }: Props) {
         nearby={nearby}
         discovered={discoveredCount}
         total={world.interactables.length}
+        showHint={hintVisible}
       />
 
       <VirtualPad onMove={setVirtual} onInteract={pulseInteract} visible={active && !opened} />

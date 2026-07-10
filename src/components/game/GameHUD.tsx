@@ -7,35 +7,41 @@ type Props = {
   nearby: Interactable | null
   discovered: number
   total: number
+  showHint?: boolean
 }
 
 const SLOTS = 9
 
-export function GameHUD({ biome, hotbar, nearby, discovered, total }: Props) {
+export function GameHUD({ biome, hotbar, nearby, discovered, total, showHint = true }: Props) {
   const slots = Array.from({ length: SLOTS }, (_, i) => hotbar[i] ?? null)
 
   return (
     <div className="game-hud">
-      <div className="game-hud__biome">
-        <span className="game-hud__emoji" aria-hidden="true">
-          {biome.emoji}
-        </span>
-        <div>
-          <p className="game-hud__label">{biome.label}</p>
-          <p className="game-hud__title">{biome.title}</p>
+      <div className="game-hud__top">
+        <div className="game-hud__biome">
+          <span className="game-hud__emoji" aria-hidden="true">
+            {biome.emoji}
+          </span>
+          <div className="game-hud__biome-text">
+            <p className="game-hud__label">{biome.label}</p>
+            <p className="game-hud__title">{biome.title}</p>
+          </div>
         </div>
-      </div>
 
-      <p className="game-hud__progress">
-        {discovered} / {total} found
-      </p>
+        <p className="game-hud__progress">
+          {discovered}/{total}
+        </p>
+      </div>
 
       {nearby && (
         <div className="game-hud__prompt" role="status">
-          <kbd className="game-hud__key">E</kbd>
+          <span className="game-hud__prompt-icon" aria-hidden="true">
+            ✦
+          </span>
           <span>
             {nearby.kind === 'finale' ? 'enter portal' : `check ${nearby.label}`}
           </span>
+          <kbd className="game-hud__key">E</kbd>
         </div>
       )}
 
@@ -49,19 +55,17 @@ export function GameHUD({ biome, hotbar, nearby, discovered, total }: Props) {
                 </span>
                 <span className="sr-only">{item.label}</span>
               </>
-            ) : (
-              <span className="game-hud__slot-num" aria-hidden="true">
-                {i + 1}
-              </span>
-            )}
+            ) : null}
           </div>
         ))}
       </div>
 
-      <p className="game-hud__hint">
-        <span className="game-hud__hint-desk">WASD / arrows to move · E to interact</span>
-        <span className="game-hud__hint-touch">drag pad to move · tap ✦ to interact</span>
-      </p>
+      {showHint && (
+        <p className="game-hud__hint">
+          <span className="game-hud__hint-desk">WASD / arrows · E to interact</span>
+          <span className="game-hud__hint-touch">drag to move · tap ✦</span>
+        </p>
+      )}
     </div>
   )
 }

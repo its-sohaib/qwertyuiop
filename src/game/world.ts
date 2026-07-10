@@ -105,9 +105,23 @@ function buildTiles(): TileKind[][] {
     grid[y][W - 1] = 'wall'
   }
 
-  // Decorative trees in cherry + flower
+  // Decorative trees in cherry + flower (leave path corridors clear)
   scatter(grid, 12, 1, 26, 12, 'tree', 3, 0)
   scatter(grid, 26, 1, 50, 13, 'tree', 4, 1)
+
+  // Extra cherry blossom clusters
+  for (const [tx, ty] of [
+    [14, 3],
+    [20, 8],
+    [23, 4],
+    [15, 9],
+  ] as const) {
+    if (grid[ty][tx] === 'cherry') grid[ty][tx] = 'tree'
+  }
+
+  // Flower meadow denser patches (keep as flower ground — render draws blooms)
+  fill(grid, 30, 3, 36, 7, 'flower')
+  fill(grid, 36, 8, 41, 12, 'flower')
 
   // Library bookshelves (rows)
   for (let y = 14; y <= 21; y += 3) {
@@ -130,37 +144,43 @@ function buildTiles(): TileKind[][] {
   }
   fill(grid, 8, 28, 14, 34, 'cave') // clear center chamber
 
-  // Night portal frame
+  // Night portal frame + approach plaza
+  fill(grid, 34, 28, 44, 37, 'night')
   fill(grid, 36, 30, 42, 36, 'obsidian')
   fill(grid, 37, 31, 41, 35, 'portal')
 
-  // Water pond in flower forest
+  // Water pond + shore in flower forest
+  fill(grid, 41, 3, 48, 9, 'flower')
   fill(grid, 42, 4, 47, 8, 'water')
 
-  // --- Connecting paths ---
-  // Spawn → Cherry
+  // --- Connecting paths (double-wide for mobile readability) ---
   lineH(grid, 6, 5, 18)
-  // Cherry → Flower
+  lineH(grid, 7, 5, 18)
   lineH(grid, 6, 18, 32)
+  lineH(grid, 7, 18, 32)
   lineV(grid, 32, 6, 10)
-  // Spawn/Cherry down → Library
+  lineV(grid, 33, 6, 10)
   lineV(grid, 8, 6, 18)
-  // Library → Valley
+  lineV(grid, 9, 6, 18)
   lineH(grid, 18, 8, 24)
-  // Valley → east corridor → cave
+  lineH(grid, 19, 8, 24)
   lineH(grid, 18, 24, 36)
+  lineH(grid, 19, 24, 36)
   lineV(grid, 36, 18, 28)
+  lineV(grid, 37, 18, 28)
   lineH(grid, 28, 14, 36)
-  // Cave → Night
+  lineH(grid, 29, 14, 36)
   lineH(grid, 32, 14, 38)
-  // Flower down toward night (optional scenic path)
+  lineH(grid, 33, 14, 38)
   lineV(grid, 38, 10, 28)
+  lineV(grid, 39, 10, 28)
 
-  // Clear spawn plaza
+  // Clear spawn plaza with path ring
   fill(grid, 3, 3, 10, 10, 'grass')
-  grid[6][5] = 'path'
-  grid[6][6] = 'path'
-  grid[6][7] = 'path'
+  lineH(grid, 6, 4, 9)
+  lineH(grid, 7, 4, 9)
+  grid[5][6] = 'path'
+  grid[8][6] = 'path'
 
   return grid
 }

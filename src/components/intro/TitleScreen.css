@@ -178,3 +178,35 @@
     filter: brightness(1.05);
   }
 }
+
+@media (max-width: 720px) {
+  .title-screen__content {
+    padding:
+      calc(var(--safe-top) + 1rem)
+      1rem
+      calc(var(--safe-bottom) + 1.25rem);
+  }
+
+  .title-screen__frame {
+    width: min(100%, 300px);
+    margin-bottom: 0.9rem;
+  }
+
+  .title-screen__title {
+    font-size: clamp(0.78rem, 5.2vw, 1.05rem);
+  }
+
+  .title-screen__sub {
+    margin-bottom: 1.1rem;
+  }
+
+  .title-screen__btn {
+    width: min(100%, 280px);
+    min-height: 54px;
+  }
+
+  .title-screen__cloud--1,
+  .title-screen__cloud--2 {
+    opacity: 0.7;
+  }
+}
