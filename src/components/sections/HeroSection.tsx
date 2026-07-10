@@ -20,7 +20,7 @@ export function HeroSection({ onScrollDown }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          maligayang kaarawan · level 20
+          happy level 20
         </motion.p>
 
         <motion.h1
@@ -42,7 +42,7 @@ export function HeroSection({ onScrollDown }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
         >
-          Every world we built led here  and you're still my favorite spawn point.
+          20 lookin kinda OP ngl. Ang ganda mo.
         </motion.p>
 
         <motion.div
@@ -51,7 +51,7 @@ export function HeroSection({ onScrollDown }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
         >
-          <GlowButton onClick={onScrollDown}>Continue the Journey</GlowButton>
+          <GlowButton onClick={onScrollDown}>Continue the Quest</GlowButton>
         </motion.div>
 
         <motion.div

@@ -31,7 +31,7 @@ export function WorldGate({ onStart }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          a world awaits
+          birthday world loading
         </motion.p>
 
         <motion.h1
@@ -49,7 +49,7 @@ export function WorldGate({ onStart }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          A little world built with love  just for your birthday.
+          bro really spawned in 20 years ago.
         </motion.p>
 
         <motion.div
@@ -57,7 +57,7 @@ export function WorldGate({ onStart }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
         >
-          <GlowButton onClick={onStart}>Start Adventure</GlowButton>
+          <GlowButton onClick={onStart}>Enter Birthday Mode</GlowButton>
         </motion.div>
       </motion.div>
 

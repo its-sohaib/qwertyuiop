@@ -4,9 +4,9 @@ import { Section } from '../ui/Section'
 import './SecretsSection.css'
 
 const secrets = [
-  { id: 'bee', emoji: '🐝', hint: 'find the bee', message: 'buzz buzz  you found the birthday bee. reena stays winning.' },
-  { id: 'star', emoji: '⭐', hint: 'catch a star', message: 'wishing star caught. wish already came true tho.' },
-  { id: 'berry', emoji: '🫐', hint: 'glow berry', message: 'glow berries only shine for the best people.' },
+  { id: 'bee', emoji: '🐝', hint: 'find the bee', message: 'buzz buzz. Reena stays winning.' },
+  { id: 'star', emoji: '⭐', hint: 'catch a star', message: 'star caught. No hacks, just iconic.' },
+  { id: 'berry', emoji: '🫐', hint: 'glow berry', message: 'glow berry found. Salamat for being you.' },
 ]
 
 export function SecretsSection() {
@@ -21,9 +21,9 @@ export function SecretsSection() {
   }
 
   return (
-    <Section id="secrets" label="hidden" title="easter eggs">
+    <Section id="secrets" label="hidden" title="secret side quest">
       <p className="secrets__intro body-text">
-        Three little secrets are hidden here. Can you find them all?
+        Three secrets. Click around like a menace.
       </p>
       <div className="secrets__grid">
         {secrets.map((s) => (

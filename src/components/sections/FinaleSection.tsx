@@ -8,7 +8,7 @@ export function FinaleSection() {
   const reduced = useReducedMotion()
 
   return (
-    <Section id="finale" label="the end?" title="one last surprise" dark>
+    <Section id="finale" label="final screen" title="one last thing" dark>
       <div className="finale">
         <div className="finale__night" aria-hidden="true" />
         <PixelHeartBuild />
@@ -19,13 +19,16 @@ export function FinaleSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <p className="finale__line pixel-title">happy birthday</p>
-          <p className="finale__heart">❤️</p>
+          <p className="finale__line pixel-title">Happy Birthday, my nga ❤️</p>
           <p className="finale__wish body-text">
-            May your world always be filled with happiness.
+            20 looks good on you.
           </p>
-          <p className="finale__date">11 · 06 · 26</p>
-          <p className="finale__sign body-text">can't wait to hug u</p>
+          <p className="finale__wish body-text">
+            Stay weird.<br />
+            Stay pretty.<br />
+            Stay you.
+          </p>
+          <p className="finale__sign body-text">Love you always.</p>
         </motion.div>
       </div>
     </Section>

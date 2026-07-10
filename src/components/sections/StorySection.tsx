@@ -3,15 +3,13 @@ import './StorySection.css'
 
 export function StorySection() {
   return (
-    <Section id="story" label="chapter i" title="our story begins">
+    <Section id="story" label="chapter i" title="spawn lore">
       <div className="story glass-card">
         <p className="body-text story__p">
-          Somewhere between Heartopia sunsets and Minecraft nights, we started building
-          something that didn't need a map.
+          Somewhere between Heartopia and Minecraft, you became my favorite teammate.
         </p>
         <p className="body-text story__p">
-          Two little worlds. One real love. Today we celebrate the person who makes
-          every ordinary day feel enchanted.
+          NPCs could never. Ikaw talaga.
         </p>
         <div className="story__icons" aria-hidden="true">
           <span>🌸</span>

@@ -4,15 +4,15 @@ import './WishesSection.css'
 
 const wishes = [
   { title: 'wish i', text: 'you valid my nga.' },
-  { title: 'wish ii', text: 'i fuk wid yuh heavy.' },
-  { title: 'wish iii', text: 'you da real birthday.', accent: true },
+  { title: 'wish ii', text: 'i fuk wid yuh heavy. Grabe ka.' },
+  { title: 'wish iii', text: 'you da real birthday. Pwede ba?', accent: true },
 ]
 
 export function WishesSection() {
   return (
-    <Section id="wishes" label="chapter ii" title="enchanted wishes">
+    <Section id="wishes" label="chapter ii" title="tiny wishes">
       <p className="wishes__intro body-text">
-        Three wishes, sealed in books  open each one.
+        Three books. Zero cringe. Tap mo.
       </p>
       <div className="wishes__books">
         {wishes.map((w, i) => (
