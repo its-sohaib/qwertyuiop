@@ -6,14 +6,15 @@ type Props = {
   src: string
   alt: string
   size?: 'hero' | 'biome'
+  wide?: boolean
 }
 
-export function PortraitFrame({ src, alt, size = 'hero' }: Props) {
+export function PortraitFrame({ src, alt, size = 'hero', wide = false }: Props) {
   const reduced = useReducedMotion()
 
   return (
     <motion.div
-      className={`portrait portrait--${size}`}
+      className={`portrait portrait--${size}${wide ? ' portrait--wide' : ''}`}
       initial={reduced ? false : { opacity: 0, scale: 0.94, y: 20 }}
       animate={size === 'hero' ? { opacity: 1, scale: 1, y: 0 } : undefined}
       whileInView={size === 'hero' ? undefined : { opacity: 1, scale: 1, y: 0 }}
@@ -28,8 +29,8 @@ export function PortraitFrame({ src, alt, size = 'hero' }: Props) {
             src={src}
             alt={alt}
             className="portrait__img"
-            width={400}
-            height={500}
+            width={wide ? 640 : 400}
+            height={wide ? 360 : 500}
             loading={size === 'hero' ? 'eager' : 'lazy'}
             decoding="async"
           />

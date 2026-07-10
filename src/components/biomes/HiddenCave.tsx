@@ -107,7 +107,7 @@ export function HiddenCave() {
               height={484}
               decoding="async"
             />
-            <p className="cave__lick-caption">she on the glass fr</p>
+            <p className="cave__lick-caption">me when I see you fr</p>
           </motion.div>
         )}
       </AnimatePresence>

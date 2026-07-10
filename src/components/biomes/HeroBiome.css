@@ -82,14 +82,22 @@
     gap: 0.45rem;
   }
 
-  .hero-biome .portrait--hero {
+  .hero-biome .portrait--hero:not(.portrait--wide) {
     width: min(42vw, 168px);
+  }
+
+  .hero-biome .portrait--hero.portrait--wide {
+    width: min(90vw, 380px);
   }
 }
 
 @media (max-height: 700px) {
-  .hero-biome .portrait--hero {
+  .hero-biome .portrait--hero:not(.portrait--wide) {
     width: min(38vw, 148px);
+  }
+
+  .hero-biome .portrait--hero.portrait--wide {
+    width: min(88vw, 360px);
   }
 
   .hero-biome__sub {

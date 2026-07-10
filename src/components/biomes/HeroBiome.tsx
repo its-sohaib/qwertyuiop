@@ -25,7 +25,7 @@ export function HeroBiome({ onBegin, started }: Props) {
           custom map · july 11
         </motion.p>
 
-        <PortraitFrame src="/assets/her_portrait.jpeg" alt="Reena" size="hero" />
+        <PortraitFrame src="/assets/hero.gif" alt="SpongeBob and Patrick" size="hero" wide />
 
         <motion.h1
           className="hero-biome__title pixel-heading"

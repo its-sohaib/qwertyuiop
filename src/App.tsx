@@ -44,6 +44,17 @@ function App() {
     setStarted(true)
   }, [start])
 
+  const unlock = useCallback(() => {
+    setUnlocked(true)
+    void start()
+  }, [start])
+
+  const onMuteToggle = useCallback(() => {
+    toggleMute()
+    // Unmute is a gesture — make sure the track actually starts
+    void start()
+  }, [toggleMute, start])
+
   useEffect(() => {
     if (!started) return
     const t = window.setTimeout(() => {
@@ -104,17 +115,11 @@ function App() {
       <WorldSky phase={phase} />
       <AmbientLife variant={unlocked && started ? ambientVariant : 'petals'} />
 
-      {unlocked && <MuteToggle muted={muted} onToggle={toggleMute} />}
+      {unlocked && <MuteToggle muted={muted} onToggle={onMuteToggle} />}
 
       <AnimatePresence>
         {!unlocked && (
-          <PasswordGate
-            key="pw"
-            onUnlock={() => {
-              setUnlocked(true)
-              void start()
-            }}
-          />
+          <PasswordGate key="pw" onUnlock={unlock} />
         )}
       </AnimatePresence>
 

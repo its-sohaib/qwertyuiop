@@ -51,10 +51,10 @@ export function FlowerForest() {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <p className="body-copy flower-forest__text">
-            Aura so loud it's crazy.
+            My Ngaaaaa hehe
           </p>
           <p className="body-copy flower-forest__text flower-forest__text--soft">
-            I fuk wid yuh heavy.
+            I fuk wid yuh heavy
           </p>
         </motion.div>
 

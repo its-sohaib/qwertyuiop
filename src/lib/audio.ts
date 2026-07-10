@@ -1,12 +1,12 @@
 /**
  * Page audio: looping MP3 track + tiny Web Audio SFX.
- * Volume stays modest. Mute toggle controls everything.
+ * Starts on a user gesture (password unlock / Begin Adventure / unmute).
  */
 
 type AmbienceMode = 'day' | 'cave' | 'night' | 'off'
 
 const TRACK_SRC = '/assets/ambience.mp3'
-const TRACK_VOLUME = 0.38
+const TRACK_VOLUME = 0.55
 const SFX_VOLUME = 0.05
 
 class AdventureAudio {
@@ -36,9 +36,11 @@ class AdventureAudio {
 
   private ensureTrack() {
     if (this.track) return this.track
-    const audio = new Audio(TRACK_SRC)
+    const audio = document.createElement('audio')
+    audio.src = TRACK_SRC
     audio.loop = true
     audio.preload = 'auto'
+    audio.setAttribute('playsinline', '')
     audio.volume = this.muted ? 0 : TRACK_VOLUME
     this.track = audio
     return audio
@@ -53,28 +55,43 @@ class AdventureAudio {
     this.master.connect(this.ctx.destination)
   }
 
+  async playTrack() {
+    const track = this.ensureTrack()
+    if (this.muted) {
+      track.volume = 0
+      return
+    }
+    track.volume = TRACK_VOLUME
+    if (track.paused) {
+      await track.play()
+    }
+  }
+
   async start() {
-    if (this.started) return
     this.ensureCtx()
     if (this.ctx?.state === 'suspended') {
-      await this.ctx.resume()
+      await this.ctx.resume().catch(() => {})
     }
 
-    const track = this.ensureTrack()
-    track.volume = this.muted ? 0 : TRACK_VOLUME
     try {
-      await track.play()
+      await this.playTrack()
     } catch {
-      /* autoplay blocked — mute toggle / next gesture can retry */
+      // Retry once after a tick — some browsers need the element fully wired
+      try {
+        await new Promise((r) => setTimeout(r, 50))
+        await this.playTrack()
+      } catch {
+        /* still blocked */
+      }
     }
 
     this.started = true
-    this.setMode('day')
     this.notify()
   }
 
   private playTone(freq: number, duration: number, volume: number, type: OscillatorType = 'sine') {
     if (!this.ctx || !this.master || this.muted) return
+    if (this.ctx.state === 'suspended') void this.ctx.resume()
     const osc = this.ctx.createOscillator()
     const gain = this.ctx.createGain()
     osc.type = type
@@ -107,9 +124,13 @@ class AdventureAudio {
     this.muted = muted
     if (this.track) {
       this.track.volume = muted ? 0 : TRACK_VOLUME
-      if (!muted && this.started && this.track.paused) {
-        void this.track.play().catch(() => {})
+      if (!muted) {
+        void this.start()
+      } else {
+        this.track.pause()
       }
+    } else if (!muted) {
+      void this.start()
     }
     if (this.master && this.ctx) {
       this.master.gain.setTargetAtTime(muted ? 0 : SFX_VOLUME, this.ctx.currentTime, 0.08)
@@ -124,8 +145,8 @@ class AdventureAudio {
   setMode(mode: AmbienceMode) {
     if (!this.track || this.muted) return
     const vol =
-      mode === 'night' ? TRACK_VOLUME * 0.85 :
-      mode === 'cave' ? TRACK_VOLUME * 0.7 :
+      mode === 'night' ? TRACK_VOLUME * 0.9 :
+      mode === 'cave' ? TRACK_VOLUME * 0.75 :
       TRACK_VOLUME
     this.track.volume = vol
   }
