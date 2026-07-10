@@ -16,13 +16,13 @@ export function CherryGrove() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <p className="cherry__greeting body-copy">
-          Happy 20 my nga.
+          Happy 20 unc.
         </p>
         <p className="cherry__line body-copy">
-          You da real birthday.
+          You da real birthday fr.
         </p>
         <p className="cherry__line body-copy cherry__line--soft">
-          Made you a whole map. Go crazy.
+          Built you a whole map. Touch grass later.
         </p>
         <div className="cherry__trees" aria-hidden="true">
           <span className="cherry__blossom" />

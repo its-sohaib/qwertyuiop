@@ -3,14 +3,14 @@ import { EnchantedBook } from '../ui/EnchantedBook'
 import './EnchantedLibrary.css'
 
 const pages = [
-  'You valid my nga.',
-  'I fuk wid yuh heavy.',
-  'You da real birthday.',
-  'Level 20 and still that girl.',
-  'No cap you a W.',
-  'Stay weird. Stay you.',
-  'Hope this year treats you right.',
-  'Go get everything you want.',
+  'You valid my nga. Obviously.',
+  'I fuk wid yuh heavy. Too heavy.',
+  'You da real birthday. Nobody else close.',
+  '20 already? Bro thought she was immortal.',
+  'Why you always the plot tho.',
+  'Stop being pretty challenge: failed.',
+  'Aura illegal. Somebody call a mod.',
+  'Fine as hell and still humble. Suspicious.',
 ]
 
 export function EnchantedLibrary() {
@@ -23,7 +23,7 @@ export function EnchantedLibrary() {
       tone="library"
     >
       <p className="library__intro body-copy">
-        Tap a book.
+        Tap a book. Don't be shy.
       </p>
       <div className="library__shelf">
         {pages.map((text, i) => (

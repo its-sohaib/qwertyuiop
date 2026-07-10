@@ -47,14 +47,13 @@ export function NightSky() {
           transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <p className="night__headline pixel-heading">Happy Birthday.</p>
-          <p className="night__level">Level 20 unlocked.</p>
+          <p className="night__level">Level 20 unlocked unc.</p>
           <p className="night__wish body-copy">
-            Stay you. Nobody else doing it like that.
+            Stay you. Nobody else cooking like that.
           </p>
           <p className="night__wish body-copy night__wish--final">
-            Hope this year is soft on you. Good health,
-            good laughs, good people, and all the wins
-            you been waiting on.
+            Hope this year is soft. Good health, good laughs,
+            good people, and all the wins you been locked in for.
           </p>
         </motion.div>
 

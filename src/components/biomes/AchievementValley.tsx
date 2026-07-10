@@ -5,12 +5,12 @@ import { useAudio } from '../../hooks/useAudio'
 import './AchievementValley.css'
 
 const achievements = [
-  { icon: '🏆', title: 'Turned 20' },
+  { icon: '🏆', title: 'Hit 20 unc' },
   { icon: '✨', title: 'Still that girl' },
-  { icon: '⚡', title: 'Too much aura' },
-  { icon: '🗣️', title: 'Yap god' },
-  { icon: '🐝', title: 'Bee friend' },
-  { icon: '💎', title: 'Rare find' },
+  { icon: '⚡', title: 'Aura farming' },
+  { icon: '🗣️', title: 'Yap merchant' },
+  { icon: '🐝', title: 'Bee down bad' },
+  { icon: '💎', title: 'Rare ahh drop' },
   { icon: '🎬', title: 'Always the plot' },
 ]
 
@@ -31,7 +31,7 @@ export function AchievementValley() {
   return (
     <BiomeShell id="achievement-valley" emoji="🏆" label="Biome 04" title="Achievement Valley">
       <p className="valley__intro body-copy">
-        Your bag looking heavy.
+        Inventory looking crazy.
       </p>
       <div className="valley__list">
         {achievements.map((a, i) => (
