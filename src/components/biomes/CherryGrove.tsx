@@ -15,6 +15,28 @@ export function CherryGrove() {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
+        <motion.div
+          className="cherry__loot"
+          initial={reduced ? false : { opacity: 0, scale: 0.92, y: 12 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="cherry__frame">
+            <img
+              src="/assets/pig_hat.png"
+              alt="Handmade crochet pig hat"
+              className="cherry__hat"
+              width={800}
+              height={800}
+              loading="lazy"
+              decoding="async"
+            />
+            <span className="cherry__sparkle" aria-hidden="true" />
+          </div>
+          <p className="cherry__drop">rare drop unlocked</p>
+        </motion.div>
+
         <p className="cherry__greeting body-copy">
           Happy 20 unc.
         </p>

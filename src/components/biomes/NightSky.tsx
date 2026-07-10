@@ -49,7 +49,7 @@ export function NightSky() {
           <p className="night__headline pixel-heading">Happy Birthday.</p>
           <p className="night__level">Level 20 unlocked unc.</p>
           <p className="night__wish body-copy">
-            Stay you. Nobody else cooking like that.
+            Stay you. Stay hard like me.
           </p>
           <p className="night__wish body-copy night__wish--final">
             Hope this year is soft. Good health, good laughs,

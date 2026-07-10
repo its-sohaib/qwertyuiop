@@ -4,13 +4,13 @@ import './EnchantedLibrary.css'
 
 const pages = [
   'You valid my nga. Obviously.',
-  'I fuk wid yuh heavy. Too heavy.',
-  'You da real birthday. Nobody else close.',
-  '20 already? Bro thought she was immortal.',
-  'Why you always the plot tho.',
-  'Stop being pretty challenge: failed.',
-  'Aura illegal. Somebody call a mod.',
-  'Fine as hell and still humble. Suspicious.',
+  'I fuk wid yuh heavy',
+  'You da real birthday',
+  '20 already? Welcome unccc',
+  'I wanna jujustsu your kaisen',
+  'tung tung sahor',
+  'cake ahh nga',
+  'my delicious ahh nga',
 ]
 
 export function EnchantedLibrary() {

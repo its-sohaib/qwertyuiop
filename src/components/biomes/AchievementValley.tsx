@@ -6,12 +6,12 @@ import './AchievementValley.css'
 
 const achievements = [
   { icon: '🏆', title: 'Hit 20 unc' },
-  { icon: '✨', title: 'Still that girl' },
-  { icon: '⚡', title: 'Aura farming' },
+  { icon: '🎨', title: 'Artistic and shi' },
+  { icon: '🎬', title: 'movies conosoir' },
+  { icon: '😈', title: 'feaky ahh' },
+  { icon: '🍑', title: 'Big bundaa' },
   { icon: '🗣️', title: 'Yap merchant' },
-  { icon: '🐝', title: 'Bee down bad' },
-  { icon: '💎', title: 'Rare ahh drop' },
-  { icon: '🎬', title: 'Always the plot' },
+  { icon: '💎', title: 'cake ahh aura' },
 ]
 
 export function AchievementValley() {

@@ -10,20 +10,22 @@ type Egg = {
   label: string
   emoji: string
   surprise: string
-  kind: 'egg' | 'chest'
+  kind: 'egg' | 'chest' | 'lick'
 }
 
 const eggs: Egg[] = [
-  { id: 'ore', label: 'glow berry', emoji: '🫐', surprise: 'You glow fr. No thoughts needed.', kind: 'egg' },
-  { id: 'crystal', label: 'amethyst', emoji: '💜', surprise: 'Shiny ahh find. Like you.', kind: 'egg' },
-  { id: 'chest', label: 'treasure chest', emoji: '📦', surprise: 'Loot get. Year about to be cooked (in a good way).', kind: 'chest' },
-  { id: 'torch', label: 'campfire', emoji: '🔥', surprise: 'Stay lit unc.', kind: 'egg' },
+  { id: 'ore', label: 'glow berry', emoji: '🫐', surprise: 'cake ahh loot fr', kind: 'egg' },
+  { id: 'crystal', label: 'amethyst', emoji: '💜', surprise: 'my delicious ahh nga', kind: 'egg' },
+  { id: 'lick', label: '???', emoji: '👅', surprise: 'feaky ahh', kind: 'lick' },
+  { id: 'torch', label: 'campfire', emoji: '🔥', surprise: 'tung tung sahor', kind: 'egg' },
+  { id: 'chest', label: 'treasure chest', emoji: '📦', surprise: 'I wanna jujustsu your kaisen', kind: 'chest' },
 ]
 
 export function HiddenCave() {
   const [found, setFound] = useState<Set<string>>(new Set())
   const [toast, setToast] = useState<string | null>(null)
   const [chestOpen, setChestOpen] = useState(false)
+  const [licked, setLicked] = useState(false)
   const { playSparkle, playChest } = useAudio()
   const reduced = useReducedMotion()
 
@@ -33,11 +35,14 @@ export function HiddenCave() {
     if (egg.kind === 'chest') {
       setChestOpen(true)
       playChest()
+    } else if (egg.kind === 'lick') {
+      setLicked(true)
+      playSparkle()
     } else {
       playSparkle()
     }
     setToast(egg.surprise)
-    window.setTimeout(() => setToast(null), 3200)
+    window.setTimeout(() => setToast(null), 2800)
   }
 
   return (
@@ -50,12 +55,13 @@ export function HiddenCave() {
         {eggs.map((egg, i) => {
           const isFound = found.has(egg.id)
           const isChest = egg.kind === 'chest'
+          const isLick = egg.kind === 'lick'
 
           return (
             <motion.button
               key={egg.id}
               type="button"
-              className={`cave__egg ${isFound ? 'cave__egg--found' : ''} ${isChest ? 'cave__egg--chest' : ''}`}
+              className={`cave__egg ${isFound ? 'cave__egg--found' : ''} ${isChest ? 'cave__egg--chest' : ''} ${isLick ? 'cave__egg--lick' : ''}`}
               onClick={() => discover(egg)}
               initial={reduced ? false : { opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -68,7 +74,13 @@ export function HiddenCave() {
                 {isChest && chestOpen ? '✨' : isFound ? '✨' : egg.emoji}
               </span>
               <span className="cave__label">
-                {isFound ? (isChest ? 'opened!' : 'found!') : egg.label}
+                {isFound
+                  ? isChest
+                    ? 'opened!'
+                    : isLick
+                      ? 'caught licking'
+                      : 'found!'
+                  : egg.label}
               </span>
               {isChest && (
                 <span className={`cave__lid ${chestOpen ? 'cave__lid--open' : ''}`} aria-hidden="true" />
@@ -78,23 +90,50 @@ export function HiddenCave() {
         })}
       </div>
 
-      <p className="cave__count body-copy">
-        {found.size} / {eggs.length} discovered
-      </p>
-
       <AnimatePresence>
-        {toast && (
+        {licked && (
           <motion.div
-            className="cave__toast"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            role="status"
+            className="cave__lick"
+            initial={{ opacity: 0, scale: 0.9, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
-            {toast}
+            <img
+              src="/assets/lick.gif"
+              alt="screen lick"
+              className="cave__lick-gif"
+              width={498}
+              height={484}
+              decoding="async"
+            />
+            <p className="cave__lick-caption">she on the glass fr</p>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="cave__reveal" aria-live="polite">
+        <AnimatePresence mode="wait">
+          {toast && (
+            <motion.div
+              key={toast}
+              className="cave__toast"
+              initial={{ opacity: 0, y: 10, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.98 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              role="status"
+            >
+              <span className="cave__toast-spark" aria-hidden="true">✦</span>
+              {toast}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <p className="cave__count body-copy">
+        {found.size} / {eggs.length} discovered
+      </p>
     </BiomeShell>
   )
 }

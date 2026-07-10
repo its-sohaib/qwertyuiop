@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { WorldSky } from './components/scenery/WorldSky'
 import { AmbientLife } from './components/scenery/AmbientLife'
 import { MuteToggle } from './components/audio/MuteToggle'
+import { PasswordGate, wasUnlocked } from './components/intro/PasswordGate'
 import { HeroBiome } from './components/biomes/HeroBiome'
 import { CherryGrove } from './components/biomes/CherryGrove'
 import { FlowerForest } from './components/biomes/FlowerForest'
@@ -32,6 +34,7 @@ const AUDIO_BY_PHASE: Record<SkyPhase, 'day' | 'cave' | 'night'> = {
 }
 
 function App() {
+  const [unlocked, setUnlocked] = useState(() => wasUnlocked())
   const [started, setStarted] = useState(false)
   const [phase, setPhase] = useState<SkyPhase>('hero')
   const { muted, start, toggleMute, setMode } = useAudio()
@@ -53,11 +56,11 @@ function App() {
   }, [started])
 
   useEffect(() => {
-    document.body.style.overflow = started ? '' : 'hidden'
+    document.body.style.overflow = unlocked && started ? '' : 'hidden'
     return () => {
       document.body.style.overflow = ''
     }
-  }, [started])
+  }, [unlocked, started])
 
   useEffect(() => {
     if (!started) return
@@ -99,23 +102,36 @@ function App() {
   return (
     <div className="app">
       <WorldSky phase={phase} />
-      {/* Ambient always — hero feels alive before the gate opens */}
-      <AmbientLife variant={started ? ambientVariant : 'petals'} />
+      <AmbientLife variant={unlocked && started ? ambientVariant : 'petals'} />
 
-      <MuteToggle muted={muted} onToggle={toggleMute} />
+      {unlocked && <MuteToggle muted={muted} onToggle={toggleMute} />}
 
-      <main className={`app__main ${started ? 'app__main--live' : 'app__main--gated'}`}>
-        <HeroBiome onBegin={begin} started={started} />
+      <AnimatePresence>
+        {!unlocked && (
+          <PasswordGate
+            key="pw"
+            onUnlock={() => {
+              setUnlocked(true)
+              void start()
+            }}
+          />
+        )}
+      </AnimatePresence>
 
-        <div className={`app__journey ${started ? 'app__journey--visible' : ''}`} aria-hidden={!started}>
-          <CherryGrove />
-          <FlowerForest />
-          <EnchantedLibrary />
-          <AchievementValley />
-          <HiddenCave />
-          <NightSky />
-        </div>
-      </main>
+      {unlocked && (
+        <main className={`app__main ${started ? 'app__main--live' : 'app__main--gated'}`}>
+          <HeroBiome onBegin={begin} started={started} />
+
+          <div className={`app__journey ${started ? 'app__journey--visible' : ''}`} aria-hidden={!started}>
+            <CherryGrove />
+            <FlowerForest />
+            <EnchantedLibrary />
+            <AchievementValley />
+            <HiddenCave />
+            <NightSky />
+          </div>
+        </main>
+      )}
     </div>
   )
 }
