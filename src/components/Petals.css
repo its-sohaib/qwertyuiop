@@ -1,0 +1,73 @@
+.petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  border-radius: 50% 50% 50% 0;
+  animation: petalFall linear infinite;
+  opacity: 0;
+  box-shadow:
+    inset -1px -2px 3px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.petal--0 {
+  background: linear-gradient(145deg, #f4a5b0, #e8435a);
+}
+
+.petal--1 {
+  background: linear-gradient(145deg, #ffc4b8, #ff9a8b);
+}
+
+.petal--2 {
+  background: linear-gradient(145deg, #e8d5f2, #c9a0dc);
+}
+
+.petal--3 {
+  background: linear-gradient(145deg, #ffb896, #e8435a 80%);
+}
+
+.petal--v0 {
+  border-radius: 50% 50% 0 50%;
+}
+
+.petal--v1 {
+  border-radius: 50% 0 50% 50%;
+}
+
+.petal--v2 {
+  border-radius: 0 50% 50% 50%;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(-5vh) translateX(0) rotate(var(--rot, 0deg));
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.85;
+  }
+  25% {
+    transform: translateY(25vh) translateX(calc(var(--drift, 0px) * 0.5)) rotate(calc(var(--rot, 0deg) + 90deg));
+  }
+  50% {
+    transform: translateY(50vh) translateX(var(--drift, 0px)) rotate(calc(var(--rot, 0deg) + 180deg));
+    opacity: 0.75;
+  }
+  75% {
+    transform: translateY(75vh) translateX(calc(var(--drift, 0px) * 1.2)) rotate(calc(var(--rot, 0deg) + 270deg));
+  }
+  95% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(108vh) translateX(calc(var(--drift, 0px) * 1.5)) rotate(calc(var(--rot, 0deg) + 360deg));
+    opacity: 0;
+  }
+}

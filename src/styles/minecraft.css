@@ -1,0 +1,87 @@
+/* Minecraft block world design tokens */
+:root {
+  --mc-sky-top: #5b9bf5;
+  --mc-sky-bottom: #a8d8ff;
+  --mc-grass: #5dab46;
+  --mc-grass-light: #7ec850;
+  --mc-grass-dark: #4a9638;
+  --mc-dirt: #8b6914;
+  --mc-dirt-dark: #6b5010;
+  --mc-stone: #7a7a7a;
+  --mc-stone-dark: #555;
+  --mc-oak: #b8945f;
+  --mc-oak-dark: #8b6914;
+  --mc-gui-bg: rgba(16, 16, 16, 0.92);
+  --mc-gui-border: #373737;
+  --mc-gui-border-light: #555;
+  --mc-text: #fff;
+  --mc-text-shadow: #3f3f3f;
+  --mc-heart: #ff385e;
+  --mc-xp: #80ff20;
+  --mc-gold: #ffaa00;
+
+  --mc-block: 16px;
+}
+
+.mc-pixel {
+  font-family: var(--font-pixel);
+  line-height: 1.8;
+  text-shadow: 2px 2px 0 var(--mc-text-shadow);
+  image-rendering: pixelated;
+}
+
+.mc-panel {
+  background: var(--mc-gui-bg);
+  border: 3px solid;
+  border-color: #555 #111 #111 #555;
+  box-shadow: inset 0 0 0 1px #2a2a2a;
+  image-rendering: pixelated;
+}
+
+.mc-panel--light {
+  background: rgba(198, 156, 109, 0.95);
+  border-color: #e8c88a #6b5010 #6b5010 #e8c88a;
+  color: #2a2118;
+}
+
+.mc-sign {
+  background: var(--mc-oak);
+  border: 3px solid;
+  border-color: #d4b483 #6b5010 #6b5010 #d4b483;
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.15),
+    0 4px 0 #6b5010;
+}
+
+.mc-frame {
+  padding: 6px;
+  background: #8b7355;
+  border: 4px solid;
+  border-color: #c4a882 #4a3828 #4a3828 #c4a882;
+  box-shadow:
+    inset 0 0 0 2px #6b5010,
+    0 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.mc-frame__inner {
+  border: 3px solid #c9a227;
+  background: #3d2817;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.mc-hearts {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+}
+
+.mc-heart-icon {
+  width: 14px;
+  height: 14px;
+}
+
+@media (min-width: 480px) {
+  :root {
+    --mc-block: 18px;
+  }
+}

@@ -1,0 +1,78 @@
+@import './styles/minecraft.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-pixel: 'Press Start 2P', monospace;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--mc-text);
+  background: var(--mc-sky-top);
+  overflow-x: hidden;
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+::selection {
+  background: var(--mc-heart);
+  color: #fff;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

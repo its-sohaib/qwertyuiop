@@ -1,0 +1,62 @@
+.pixel-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.pixel-hearts__item {
+  position: absolute;
+  top: -20px;
+  image-rendering: pixelated;
+  animation: heartFall linear infinite;
+  opacity: 0;
+  clip-path: polygon(
+    25% 0%,
+    0% 30%,
+    0% 55%,
+    25% 80%,
+    50% 100%,
+    75% 80%,
+    100% 55%,
+    100% 30%,
+    75% 0%,
+    50% 15%
+  );
+}
+
+.pixel-hearts__item--0 {
+  background: #ff385e;
+  box-shadow: inset -2px -2px 0 #c62828;
+}
+
+.pixel-hearts__item--1 {
+  background: #ff8fab;
+  box-shadow: inset -2px -2px 0 #e8435a;
+}
+
+.pixel-hearts__item--2 {
+  background: #c9a0dc;
+  box-shadow: inset -2px -2px 0 #9b6fc4;
+}
+
+@keyframes heartFall {
+  0% {
+    transform: translateY(-5vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) translateX(var(--drift, 0px)) rotate(180deg);
+  }
+  92% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(108vh) translateX(calc(var(--drift, 0px) * 1.5)) rotate(360deg);
+    opacity: 0;
+  }
+}

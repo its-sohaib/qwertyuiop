@@ -1,0 +1,145 @@
+.game-decor {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.game-decor__item {
+  position: absolute;
+}
+
+.game-decor__cloud--1 {
+  top: 6%;
+  left: -4%;
+  width: 90px;
+  opacity: 0.7;
+}
+
+.game-decor__cloud--2 {
+  top: 14%;
+  right: -6%;
+  width: 72px;
+  opacity: 0.55;
+}
+
+.game-decor__star--1 {
+  top: 22%;
+  right: 8%;
+  width: 22px;
+  opacity: 0.75;
+}
+
+.game-decor__star--2 {
+  top: 38%;
+  left: 6%;
+  width: 18px;
+  opacity: 0.6;
+}
+
+.game-decor__heart--1 {
+  top: 32%;
+  left: 4%;
+  width: 20px;
+  opacity: 0.55;
+}
+
+.game-decor__heart--2 {
+  top: 48%;
+  right: 5%;
+  width: 16px;
+  opacity: 0.45;
+}
+
+.game-decor__chibi--reena {
+  top: 18%;
+  left: 2%;
+  width: 52px;
+  opacity: 0.88;
+  filter: drop-shadow(0 4px 8px rgba(201, 160, 220, 0.35));
+}
+
+.game-decor__chibi--friend {
+  top: 20%;
+  right: 2%;
+  width: 48px;
+  opacity: 0.82;
+  filter: drop-shadow(0 4px 8px rgba(92, 107, 192, 0.25));
+}
+
+.game-decor__steve {
+  bottom: 28%;
+  left: 3%;
+  width: 36px;
+  opacity: 0.85;
+  filter: drop-shadow(2px 4px 0 rgba(0, 0, 0, 0.15));
+}
+
+.game-decor__alex {
+  bottom: 22%;
+  right: 4%;
+  width: 34px;
+  opacity: 0.8;
+  filter: drop-shadow(2px 4px 0 rgba(0, 0, 0, 0.12));
+}
+
+.game-decor__pig {
+  bottom: 38%;
+  right: 2%;
+  width: 40px;
+  opacity: 0.75;
+}
+
+.game-decor__axolotl {
+  bottom: 34%;
+  left: 1%;
+  width: 44px;
+  opacity: 0.9;
+  filter: drop-shadow(0 3px 6px rgba(244, 143, 177, 0.4));
+}
+
+.game-decor__block--1 {
+  bottom: 8%;
+  left: 6%;
+  width: 28px;
+  opacity: 0.7;
+}
+
+.game-decor__block--2 {
+  bottom: 6%;
+  right: 8%;
+  width: 24px;
+  opacity: 0.65;
+}
+
+.game-decor__block--3 {
+  bottom: 12%;
+  left: 50%;
+  width: 22px;
+  opacity: 0.5;
+  transform: translateX(-50%);
+}
+
+@media (min-width: 480px) {
+  .game-decor__chibi--reena,
+  .game-decor__chibi--friend {
+    width: 64px;
+  }
+
+  .game-decor__steve,
+  .game-decor__alex {
+    width: 42px;
+  }
+
+  .game-decor__axolotl {
+    width: 52px;
+  }
+}
+
+@media (max-height: 700px) {
+  .game-decor__chibi--friend,
+  .game-decor__pig {
+    opacity: 0.5;
+  }
+}
