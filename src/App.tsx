@@ -1,42 +1,51 @@
 import { useState, useEffect } from 'react'
-import { Hero } from './components/Hero'
-import { Message } from './components/Message'
-import { Gallery } from './components/Gallery'
-import { Closing } from './components/Closing'
-import { PixelHearts } from './components/PixelHearts'
-import { Background } from './components/Background'
-import { McDecor } from './components/McDecor'
-import { BlockReveal } from './components/BlockReveal'
+import { AnimatePresence } from 'framer-motion'
+import { LayeredBackground } from './components/scenery/LayeredBackground'
+import { AmbientParticles } from './components/scenery/AmbientParticles'
+import { WorldGate } from './components/intro/WorldGate'
+import { HeroSection } from './components/sections/HeroSection'
+import { StorySection } from './components/sections/StorySection'
+import { WishesSection } from './components/sections/WishesSection'
+import { MemoriesSection } from './components/sections/MemoriesSection'
+import { AchievementsSection } from './components/sections/AchievementsSection'
+import { SecretsSection } from './components/sections/SecretsSection'
+import { FinaleSection } from './components/sections/FinaleSection'
 import './App.css'
 
 function App() {
-  const [revealed, setRevealed] = useState(false)
+  const [started, setStarted] = useState(false)
 
   useEffect(() => {
-    document.body.style.overflow = revealed ? '' : 'hidden'
+    document.body.style.overflow = started ? '' : 'hidden'
     return () => {
       document.body.style.overflow = ''
     }
-  }, [revealed])
+  }, [started])
+
+  function scrollToStory() {
+    document.getElementById('story')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <div className={`app ${revealed ? 'app--revealed' : ''}`}>
-      <Background />
-      {revealed && (
-        <>
-          <McDecor />
-          <PixelHearts />
-        </>
-      )}
-      <div className={`app__content ${revealed ? 'app__content--visible' : ''}`}>
-        <main>
-          <Hero />
-          <Message />
-          <Gallery />
-          <Closing />
+    <div className="app">
+      <LayeredBackground />
+      {started && <AmbientParticles />}
+
+      <AnimatePresence>
+        {!started && <WorldGate key="gate" onStart={() => setStarted(true)} />}
+      </AnimatePresence>
+
+      {started && (
+        <main className="app__journey">
+          <HeroSection onScrollDown={scrollToStory} />
+          <StorySection />
+          <WishesSection />
+          <MemoriesSection />
+          <AchievementsSection />
+          <SecretsSection />
+          <FinaleSection />
         </main>
-      </div>
-      {!revealed && <BlockReveal onOpen={() => setRevealed(true)} />}
+      )}
     </div>
   )
 }

@@ -1,0 +1,103 @@
+.enchanted-book {
+  position: relative;
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(123, 94, 167, 0.35) 0%, rgba(45, 27, 78, 0.5) 100%);
+  border: 1px solid rgba(245, 199, 106, 0.25);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.enchanted-book:hover {
+  border-color: rgba(245, 199, 106, 0.45);
+  box-shadow: var(--shadow-soft), 0 0 30px rgba(245, 199, 106, 0.15);
+}
+
+.enchanted-book--accent {
+  border-color: rgba(255, 107, 138, 0.4);
+  background: linear-gradient(135deg, rgba(255, 107, 138, 0.2) 0%, rgba(123, 94, 167, 0.35) 100%);
+}
+
+.enchanted-book--open {
+  border-color: rgba(245, 199, 106, 0.5);
+}
+
+.enchanted-book__particles {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(126, 232, 192, 0.4) 0%, transparent 70%);
+  animation: enchantPulse 2s ease-in-out infinite;
+}
+
+.enchanted-book__spine {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 6px;
+  background: linear-gradient(180deg, var(--gold) 0%, var(--lavender-deep) 100%);
+  border-radius: 0 3px 3px 0;
+  opacity: 0.7;
+}
+
+.enchanted-book__cover {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.enchanted-book__emoji {
+  font-size: 1.25rem;
+}
+
+.enchanted-book__title {
+  font-size: clamp(0.42rem, 2.2vw, 0.52rem);
+  color: var(--gold);
+}
+
+.enchanted-book__hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.enchanted-book__page {
+  overflow: hidden;
+}
+
+.enchanted-book__text {
+  padding-top: 1rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--cream);
+}
+
+.enchanted-book--accent .enchanted-book__text {
+  color: var(--pink-soft);
+  font-weight: 500;
+}
+
+@keyframes enchantPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enchanted-book__particles {
+    animation: none;
+  }
+}

@@ -1,0 +1,32 @@
+:root {
+  /* Sunset → night palette */
+  --sunset-1: #ff8a5c;
+  --sunset-2: #ff6b8a;
+  --sunset-3: #e8a0d8;
+  --lavender: #b8a0dc;
+  --lavender-deep: #7b5ea7;
+  --night-1: #2d1b4e;
+  --night-2: #1a1030;
+  --night-3: #0f0820;
+  --emerald: #4ecf9a;
+  --emerald-soft: #7ee8c0;
+  --gold: #f5c76a;
+  --gold-glow: #ffe4a0;
+  --pink-soft: #ffc4d6;
+  --cream: #fff8f2;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-strong: rgba(255, 255, 255, 0.14);
+  --text: #fff8f5;
+  --text-soft: rgba(255, 248, 245, 0.72);
+  --text-muted: rgba(255, 248, 245, 0.5);
+  --shadow-soft: 0 24px 80px rgba(15, 8, 32, 0.45);
+  --shadow-glow: 0 0 60px rgba(245, 199, 106, 0.25);
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --section-pad: clamp(4rem, 12vw, 7rem);
+}

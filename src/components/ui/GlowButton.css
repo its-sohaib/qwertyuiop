@@ -1,0 +1,64 @@
+.glow-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.75rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.glow-btn--primary {
+  background: linear-gradient(135deg, var(--sunset-1) 0%, var(--sunset-2) 50%, var(--lavender-deep) 100%);
+  color: #fff;
+  box-shadow:
+    0 8px 32px rgba(255, 107, 138, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+
+.glow-btn--ghost {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--cream);
+  backdrop-filter: blur(12px);
+}
+
+.glow-btn__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  animation: btnShine 4s ease-in-out infinite;
+}
+
+.glow-btn__text {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes btnShine {
+  0%,
+  70%,
+  100% {
+    transform: translateX(-120%);
+  }
+  85% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-btn__shine {
+    animation: none;
+  }
+}

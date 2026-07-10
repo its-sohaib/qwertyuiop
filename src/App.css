@@ -3,25 +3,7 @@
   min-height: 100dvh;
 }
 
-.app__content {
+.app__journey {
   position: relative;
   z-index: 2;
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 0.7s ease 0.35s,
-    transform 0.7s ease 0.35s;
-  pointer-events: none;
-}
-
-.app__content--visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-main {
-  position: relative;
-  z-index: 2;
-  padding-bottom: calc(var(--mc-block) * 4);
 }

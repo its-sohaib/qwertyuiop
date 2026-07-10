@@ -1,0 +1,140 @@
+.scenery {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scenery__sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--night-3) 0%,
+    #3d2060 18%,
+    #6b3a6e 32%,
+    var(--sunset-2) 48%,
+    var(--sunset-1) 58%,
+    #ffb8a0 68%,
+    var(--lavender) 82%,
+    var(--night-1) 100%
+  );
+}
+
+.scenery__sun {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  width: min(280px, 55vw);
+  height: min(280px, 55vw);
+  margin-left: min(-140px, -27.5vw);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 228, 160, 0.9) 0%,
+    rgba(255, 138, 92, 0.5) 35%,
+    transparent 70%
+  );
+  filter: blur(2px);
+}
+
+.scenery__mountains {
+  position: absolute;
+  bottom: 18%;
+  left: -10%;
+  right: -10%;
+  height: 35%;
+  opacity: 0.55;
+}
+
+.scenery__mountains--back {
+  background:
+    linear-gradient(165deg, transparent 40%, rgba(45, 27, 78, 0.8) 40%),
+    linear-gradient(195deg, transparent 55%, rgba(60, 35, 90, 0.7) 55%),
+    linear-gradient(175deg, transparent 48%, rgba(35, 20, 55, 0.75) 48%);
+  filter: blur(1px);
+}
+
+.scenery__mountains--front {
+  bottom: 12%;
+  height: 28%;
+  opacity: 0.7;
+  background:
+    linear-gradient(170deg, transparent 52%, rgba(26, 16, 48, 0.9) 52%),
+    linear-gradient(200deg, transparent 60%, rgba(35, 22, 60, 0.85) 60%);
+}
+
+.scenery__blossom {
+  position: absolute;
+  bottom: 22%;
+  width: 140px;
+  height: 200px;
+  opacity: 0.35;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 80%, rgba(255, 180, 200, 0.5) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 30% 60%, rgba(232, 160, 216, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 25% at 70% 50%, rgba(255, 196, 214, 0.35) 0%, transparent 55%);
+  filter: blur(8px);
+}
+
+.scenery__blossom--left {
+  left: -20px;
+  transform: scaleX(-1);
+}
+
+.scenery__blossom--right {
+  right: -20px;
+}
+
+.scenery__flowers {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 22%;
+  background:
+    radial-gradient(ellipse 30% 80% at 15% 100%, rgba(180, 130, 220, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 70% at 45% 100%, rgba(255, 150, 180, 0.3) 0%, transparent 65%),
+    radial-gradient(ellipse 28% 75% at 75% 100%, rgba(200, 140, 230, 0.32) 0%, transparent 68%),
+    radial-gradient(ellipse 20% 60% at 90% 100%, rgba(255, 180, 200, 0.25) 0%, transparent 60%),
+    linear-gradient(0deg, rgba(46, 90, 70, 0.25) 0%, transparent 40%);
+}
+
+.scenery__stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 12%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 25% 8%, rgba(255, 228, 160, 0.7), transparent),
+    radial-gradient(1px 1px at 40% 15%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 55% 6%, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(1.5px 1.5px at 70% 10%, rgba(245, 199, 106, 0.65), transparent),
+    radial-gradient(1px 1px at 85% 14%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 92% 5%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 18% 22%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 62% 18%, rgba(255, 255, 255, 0.45), transparent);
+  animation: starsTwinkle 6s ease-in-out infinite alternate;
+}
+
+.scenery__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(15, 8, 32, 0.5) 100%);
+}
+
+@keyframes starsTwinkle {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scenery__stars {
+    animation: none;
+    opacity: 0.85;
+  }
+}

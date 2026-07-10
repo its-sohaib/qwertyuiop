@@ -1,0 +1,24 @@
+.journey-section {
+  position: relative;
+  z-index: 2;
+  padding: var(--section-pad) 1.25rem;
+}
+
+.journey-section--dark {
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 8, 32, 0.6) 30%, rgba(15, 8, 32, 0.85) 100%);
+}
+
+.journey-section__inner {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.journey-section__label {
+  text-align: center;
+  margin-bottom: 0.85rem;
+}
+
+.journey-section__title {
+  text-align: center;
+  margin-bottom: 2rem;
+}

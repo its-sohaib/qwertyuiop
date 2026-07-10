@@ -1,0 +1,33 @@
+.pixel-heart-build {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto 1.5rem;
+}
+
+.pixel-heart-build__grid {
+  display: grid;
+  gap: 2px;
+  width: min(220px, 55vw);
+}
+
+.pixel-heart-build__empty {
+  aspect-ratio: 1;
+}
+
+.pixel-heart-build__block {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #ff6b8a 0%, #e8435a 100%);
+  box-shadow:
+    inset -1px -1px 0 rgba(0, 0, 0, 0.2),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(255, 107, 138, 0.4);
+}
+
+.pixel-heart-build__block:nth-child(3n) {
+  background: linear-gradient(135deg, #ff8fab 0%, #ff6b8a 100%);
+}
+
+.pixel-heart-build__block:nth-child(5n) {
+  background: linear-gradient(135deg, #e8a0d8 0%, #ff6b8a 100%);
+}

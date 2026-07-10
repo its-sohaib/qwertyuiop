@@ -1,0 +1,147 @@
+.portrait-frame {
+  position: relative;
+  width: min(88vw, 320px);
+  margin: 0 auto;
+}
+
+.portrait-frame__glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(ellipse, rgba(245, 199, 106, 0.25) 0%, rgba(232, 107, 138, 0.15) 40%, transparent 70%);
+  filter: blur(20px);
+  animation: portraitGlow 5s ease-in-out infinite alternate;
+}
+
+.portrait-frame__inner {
+  position: relative;
+  padding: 10px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 2px solid rgba(245, 199, 106, 0.35);
+  box-shadow:
+    var(--shadow-soft),
+    var(--shadow-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.portrait-frame__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: calc(var(--radius-xl) - 8px);
+}
+
+.portrait-frame__shine {
+  position: absolute;
+  inset: 10px;
+  border-radius: calc(var(--radius-xl) - 8px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 200, 150, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+.portrait-frame__corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--gold);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.portrait-frame__corner--tl {
+  top: 4px;
+  left: 4px;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 4px 0 0 0;
+}
+
+.portrait-frame__corner--tr {
+  top: 4px;
+  right: 4px;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 0 4px 0 0;
+}
+
+.portrait-frame__corner--bl {
+  bottom: 4px;
+  left: 4px;
+  border-right: none;
+  border-top: none;
+  border-radius: 0 0 0 4px;
+}
+
+.portrait-frame__corner--br {
+  bottom: 4px;
+  right: 4px;
+  border-left: none;
+  border-top: none;
+  border-radius: 0 0 4px 0;
+}
+
+.portrait-frame__petals span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--pink-soft);
+  border-radius: 50% 0 50% 0;
+  opacity: 0.5;
+  animation: petalFloat 6s ease-in-out infinite;
+}
+
+.portrait-frame__petals span:nth-child(1) {
+  top: 10%;
+  left: -4%;
+  animation-delay: 0s;
+}
+
+.portrait-frame__petals span:nth-child(2) {
+  top: 60%;
+  right: -6%;
+  animation-delay: 2s;
+  background: var(--lavender);
+}
+
+.portrait-frame__petals span:nth-child(3) {
+  bottom: 15%;
+  left: 5%;
+  animation-delay: 4s;
+}
+
+@keyframes portraitGlow {
+  from {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes petalFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(15deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-frame__glow,
+  .portrait-frame__petals span {
+    animation: none;
+  }
+}
