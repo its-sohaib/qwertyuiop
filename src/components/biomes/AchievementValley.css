@@ -1,9 +1,0 @@
-.valley__intro {
-  text-align: center;
-}
-
-.valley__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}

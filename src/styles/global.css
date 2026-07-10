@@ -21,9 +21,12 @@ body {
   line-height: 1.65;
   color: var(--text);
   background: var(--sky-night);
-  overflow-x: hidden;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 #root {

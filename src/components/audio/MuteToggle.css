@@ -7,18 +7,16 @@
   height: var(--touch);
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  background: rgba(26, 16, 48, 0.55);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(12, 6, 24, 0.75);
+  border: 3px solid rgba(255, 255, 255, 0.2);
   color: var(--cream);
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.25s var(--ease-out), background 0.25s ease;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .mute-toggle:active {
-  transform: scale(0.94);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
 }
 
 .mute-toggle__icon {
@@ -29,7 +27,7 @@
 
 @media (hover: hover) {
   .mute-toggle:hover {
-    background: rgba(26, 16, 48, 0.75);
-    transform: scale(1.05);
+    background: rgba(26, 16, 48, 0.9);
+    border-color: rgba(245, 199, 106, 0.45);
   }
 }

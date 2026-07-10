@@ -1,0 +1,41 @@
+.ach-toast {
+  position: fixed;
+  top: calc(var(--safe-top) + 4.5rem);
+  right: calc(var(--safe-right) + 0.85rem);
+  z-index: 50;
+  pointer-events: none;
+}
+
+.ach-toast__card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: min(280px, calc(100vw - 2rem));
+  padding: 0.65rem 0.85rem;
+  background: rgba(20, 20, 20, 0.92);
+  border: 3px solid #555;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+}
+
+.ach-toast__icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  background: #3a3a3a;
+  border: 2px solid #777;
+}
+
+.ach-toast__label {
+  font-family: var(--font-pixel);
+  font-size: 0.4rem;
+  color: #fcfc00;
+  margin-bottom: 0.25rem;
+}
+
+.ach-toast__title {
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 500;
+}

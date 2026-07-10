@@ -1,23 +1,6 @@
 .app {
   position: relative;
   min-height: 100dvh;
-}
-
-.app__main {
-  position: relative;
-  z-index: 2;
-}
-
-.app__main--gated .app__journey {
-  visibility: hidden;
-  height: 0;
   overflow: hidden;
-  pointer-events: none;
-}
-
-.app__journey--visible {
-  visibility: visible;
-  height: auto;
-  overflow: visible;
-  pointer-events: auto;
+  background: var(--sky-deep);
 }

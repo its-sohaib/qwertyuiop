@@ -1,0 +1,144 @@
+.imodal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding:
+    calc(var(--safe-top) + 1rem)
+    1rem
+    calc(var(--safe-bottom) + 1rem);
+  background: rgba(12, 6, 24, 0.62);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.imodal__card {
+  width: min(100%, 420px);
+  max-height: min(82dvh, 640px);
+  overflow: auto;
+  padding: 1.25rem 1.15rem 1.1rem;
+  background: linear-gradient(180deg, rgba(42, 28, 68, 0.95), rgba(18, 10, 36, 0.96));
+  border: 3px solid rgba(245, 199, 106, 0.45);
+  box-shadow:
+    6px 6px 0 rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(245, 199, 106, 0.12);
+}
+
+.imodal__card--finale {
+  border-color: rgba(255, 158, 181, 0.55);
+  box-shadow:
+    6px 6px 0 rgba(0, 0, 0, 0.4),
+    0 0 48px rgba(255, 158, 181, 0.2);
+}
+
+.imodal__label {
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.imodal__media {
+  margin-bottom: 1rem;
+  border: 3px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.imodal__media--lick {
+  border-color: rgba(255, 158, 181, 0.45);
+}
+
+.imodal__img {
+  width: 100%;
+  height: auto;
+  max-height: 240px;
+  object-fit: contain;
+  margin-inline: auto;
+  image-rendering: auto;
+}
+
+.imodal__strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.imodal__snap {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+}
+
+.imodal__heart {
+  display: grid;
+  gap: 3px;
+  justify-content: center;
+  margin: 0.25rem 0 1.1rem;
+}
+
+.imodal__heart-row {
+  display: flex;
+  gap: 3px;
+}
+
+.imodal__px {
+  width: 14px;
+  height: 14px;
+  background: transparent;
+}
+
+.imodal__px--on {
+  background: #ff6b8a;
+  box-shadow: 0 0 8px rgba(255, 107, 138, 0.55);
+}
+
+.imodal__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 1.15rem;
+}
+
+.imodal__line {
+  font-size: clamp(1.05rem, 3.4vw, 1.2rem);
+  color: var(--cream);
+  line-height: 1.55;
+}
+
+.imodal__line--soft {
+  color: var(--cream-soft);
+  font-size: clamp(0.98rem, 3vw, 1.08rem);
+}
+
+.imodal__line--hero {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.55rem, 2.4vw, 0.7rem);
+  line-height: 1.7;
+  color: var(--gold-glow);
+}
+
+.imodal__close {
+  width: 100%;
+  min-height: var(--touch);
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--sky-deep);
+  background: linear-gradient(135deg, var(--gold), var(--pink));
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+.imodal__close:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+}
