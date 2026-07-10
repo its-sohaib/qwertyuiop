@@ -14,10 +14,10 @@ type Egg = {
 }
 
 const eggs: Egg[] = [
-  { id: 'ore', label: 'glow berry', emoji: '🫐', surprise: 'Sweet find. You glow different.', kind: 'egg' },
-  { id: 'crystal', label: 'amethyst', emoji: '💜', surprise: 'Shiny. Just like your vibe.', kind: 'egg' },
-  { id: 'chest', label: 'treasure chest', emoji: '📦', surprise: 'Loot acquired: one unforgettable year ahead.', kind: 'chest' },
-  { id: 'torch', label: 'campfire', emoji: '🔥', surprise: 'Cozy unlocked. Stay warm out there.', kind: 'egg' },
+  { id: 'ore', label: 'glow berry', emoji: '🫐', surprise: 'Nice. You glow fr.', kind: 'egg' },
+  { id: 'crystal', label: 'amethyst', emoji: '💜', surprise: 'Shiny like you.', kind: 'egg' },
+  { id: 'chest', label: 'treasure chest', emoji: '📦', surprise: 'Loot get. Year gon be good.', kind: 'chest' },
+  { id: 'torch', label: 'campfire', emoji: '🔥', surprise: 'Cozy. Stay lit.', kind: 'egg' },
 ]
 
 export function HiddenCave() {
@@ -43,7 +43,7 @@ export function HiddenCave() {
   return (
     <BiomeShell id="hidden-cave" emoji="💎" label="Biome 05" title="Hidden Cave" tone="cave">
       <p className="cave__intro body-copy">
-        Tap around. Secrets hide in the dark.
+        Tap around. Free loot.
       </p>
 
       <div className="cave__grid">

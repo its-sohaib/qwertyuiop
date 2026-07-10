@@ -5,12 +5,12 @@ import './EnchantedLibrary.css'
 const pages = [
   'You valid my nga.',
   'I fuk wid yuh heavy.',
-  'You really da birthday.',
-  'Certified Level 20.',
-  'No cap, W human.',
-  'Actually built different.',
-  'Hope this year drops legendary loot.',
-  'May your RNG be absolutely cracked.',
+  'You da real birthday.',
+  'Level 20 and still that girl.',
+  'No cap you a W.',
+  'Stay weird. Stay you.',
+  'Hope this year treats you right.',
+  'Go get everything you want.',
 ]
 
 export function EnchantedLibrary() {
@@ -23,7 +23,7 @@ export function EnchantedLibrary() {
       tone="library"
     >
       <p className="library__intro body-copy">
-        Open a book. Short pages only.
+        Tap a book.
       </p>
       <div className="library__shelf">
         {pages.map((text, i) => (

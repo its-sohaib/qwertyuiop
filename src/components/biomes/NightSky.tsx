@@ -49,12 +49,12 @@ export function NightSky() {
           <p className="night__headline pixel-heading">Happy Birthday.</p>
           <p className="night__level">Level 20 unlocked.</p>
           <p className="night__wish body-copy">
-            Keep being unapologetically you.
+            Stay you. Nobody else doing it like that.
           </p>
           <p className="night__wish body-copy night__wish--final">
-            Hope this year brings peace, laughter, good health,
-            unforgettable memories, and all the legendary loot
-            life has to offer.
+            Hope this year is soft on you. Good health,
+            good laughs, good people, and all the wins
+            you been waiting on.
           </p>
         </motion.div>
 

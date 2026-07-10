@@ -6,12 +6,12 @@ import './AchievementValley.css'
 
 const achievements = [
   { icon: '🏆', title: 'Turned 20' },
-  { icon: '✨', title: 'Still iconic' },
-  { icon: '⚡', title: '+1000 Aura' },
-  { icon: '🗣️', title: 'Professional Yap Champion' },
-  { icon: '🐝', title: 'Bee Whisperer' },
-  { icon: '💎', title: 'Rare Drop' },
-  { icon: '🎬', title: 'Main Character Energy' },
+  { icon: '✨', title: 'Still that girl' },
+  { icon: '⚡', title: 'Too much aura' },
+  { icon: '🗣️', title: 'Yap god' },
+  { icon: '🐝', title: 'Bee friend' },
+  { icon: '💎', title: 'Rare find' },
+  { icon: '🎬', title: 'Always the plot' },
 ]
 
 export function AchievementValley() {
@@ -31,7 +31,7 @@ export function AchievementValley() {
   return (
     <BiomeShell id="achievement-valley" emoji="🏆" label="Biome 04" title="Achievement Valley">
       <p className="valley__intro body-copy">
-        Stats looking crazy ngl.
+        Your bag looking heavy.
       </p>
       <div className="valley__list">
         {achievements.map((a, i) => (

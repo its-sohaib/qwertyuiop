@@ -51,10 +51,10 @@ export function FlowerForest() {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <p className="body-copy flower-forest__text">
-            Certified rare drop.
+            You valid my nga.
           </p>
           <p className="body-copy flower-forest__text flower-forest__text--soft">
-            Still got infinite aura.
+            I fuk wid yuh heavy.
           </p>
         </motion.div>
 
@@ -110,7 +110,7 @@ export function FlowerForest() {
             width={600}
             height={400}
           />
-          <p className="flower-forest__caption">lowkey favorite teammate</p>
+          <p className="flower-forest__caption">us fr</p>
         </motion.div>
       </div>
     </BiomeShell>

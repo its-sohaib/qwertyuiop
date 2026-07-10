@@ -44,7 +44,7 @@ export function HeroBiome({ onBegin, started }: Props) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.95, duration: 0.8 }}
         >
-          Someone built you a whole world.
+          damn nga already 20 uncccc
         </motion.p>
 
         {!started && (
