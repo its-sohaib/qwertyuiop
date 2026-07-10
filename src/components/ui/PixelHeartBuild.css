@@ -1,33 +1,31 @@
-.pixel-heart-build {
+.pixel-heart {
   display: flex;
   justify-content: center;
-  margin: 2rem auto 1.5rem;
+  padding: 1rem 0 1.5rem;
 }
 
-.pixel-heart-build__grid {
+.pixel-heart__grid {
   display: grid;
-  gap: 2px;
-  width: min(220px, 55vw);
+  gap: 3px;
+  width: min(56vw, 200px);
 }
 
-.pixel-heart-build__empty {
+.pixel-heart__empty {
   aspect-ratio: 1;
 }
 
-.pixel-heart-build__block {
+.pixel-heart__block {
   aspect-ratio: 1;
   border-radius: 2px;
-  background: linear-gradient(135deg, #ff6b8a 0%, #e8435a 100%);
+  background: linear-gradient(145deg, #ff8a9e, #e85d6a);
   box-shadow:
-    inset -1px -1px 0 rgba(0, 0, 0, 0.2),
-    inset 1px 1px 0 rgba(255, 255, 255, 0.2),
-    0 0 8px rgba(255, 107, 138, 0.4);
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 0 8px rgba(255, 138, 158, 0.45);
 }
 
-.pixel-heart-build__block:nth-child(3n) {
-  background: linear-gradient(135deg, #ff8fab 0%, #ff6b8a 100%);
-}
-
-.pixel-heart-build__block:nth-child(5n) {
-  background: linear-gradient(135deg, #e8a0d8 0%, #ff6b8a 100%);
+@media (min-width: 768px) {
+  .pixel-heart__grid {
+    width: 220px;
+    gap: 4px;
+  }
 }

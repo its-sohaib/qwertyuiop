@@ -1,0 +1,69 @@
+.cherry {
+  text-align: center;
+  padding: 1.5rem 1.25rem 2rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 182, 201, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: relative;
+  overflow: hidden;
+}
+
+.cherry__greeting {
+  font-size: clamp(1.25rem, 4.5vw, 1.5rem);
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 0.85rem;
+}
+
+.cherry__line {
+  margin-bottom: 0.65rem;
+}
+
+.cherry__line--soft {
+  color: var(--text-muted);
+  margin-bottom: 0;
+  margin-top: 0.5rem;
+}
+
+.cherry__trees {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cherry__blossom {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 182, 201, 0.35), transparent 70%);
+  top: -10%;
+  left: 10%;
+  animation: blossom-sway 7s ease-in-out infinite;
+}
+
+.cherry__blossom--2 {
+  width: 64px;
+  height: 64px;
+  top: auto;
+  bottom: -15%;
+  left: auto;
+  right: 5%;
+  animation-delay: 1.5s;
+}
+
+.cherry__blossom--3 {
+  width: 36px;
+  height: 36px;
+  top: 40%;
+  left: auto;
+  right: -5%;
+  animation-delay: 3s;
+}
+
+@keyframes blossom-sway {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  50% { transform: translate(8px, 6px) scale(1.1); opacity: 0.85; }
+}

@@ -1,103 +1,88 @@
-.enchanted-book {
+.book {
   position: relative;
-  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, rgba(123, 94, 167, 0.35) 0%, rgba(45, 27, 78, 0.5) 100%);
-  border: 1px solid rgba(245, 199, 106, 0.25);
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1.15rem 1.25rem;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(145deg, rgba(92, 61, 122, 0.55), rgba(26, 16, 48, 0.7));
+  border: 1px solid rgba(196, 168, 232, 0.28);
   box-shadow: var(--shadow-soft);
-  cursor: pointer;
   overflow: hidden;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  min-height: var(--touch);
+  transition: border-color 0.3s ease, transform 0.3s var(--ease-out);
 }
 
-.enchanted-book:hover {
+.book--open {
   border-color: rgba(245, 199, 106, 0.45);
-  box-shadow: var(--shadow-soft), 0 0 30px rgba(245, 199, 106, 0.15);
+  box-shadow:
+    var(--shadow-soft),
+    0 0 28px rgba(196, 168, 232, 0.2);
 }
 
-.enchanted-book--accent {
-  border-color: rgba(255, 107, 138, 0.4);
-  background: linear-gradient(135deg, rgba(255, 107, 138, 0.2) 0%, rgba(123, 94, 167, 0.35) 100%);
-}
-
-.enchanted-book--open {
-  border-color: rgba(245, 199, 106, 0.5);
-}
-
-.enchanted-book__particles {
+.book__glow {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle, rgba(126, 232, 192, 0.4) 0%, transparent 70%);
-  animation: enchantPulse 2s ease-in-out infinite;
+  top: -40%;
+  right: -20%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(196, 168, 232, 0.25), transparent 70%);
+  pointer-events: none;
 }
 
-.enchanted-book__spine {
-  position: absolute;
-  left: 0;
-  top: 8px;
-  bottom: 8px;
-  width: 6px;
-  background: linear-gradient(180deg, var(--gold) 0%, var(--lavender-deep) 100%);
-  border-radius: 0 3px 3px 0;
-  opacity: 0.7;
-}
-
-.enchanted-book__cover {
+.book__cover {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
 
-.enchanted-book__emoji {
-  font-size: 1.25rem;
+.book__rune {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--lavender);
+  opacity: 0.7;
+  font-size: 0.9rem;
+  animation: rune-pulse 3s ease-in-out infinite;
 }
 
-.enchanted-book__title {
-  font-size: clamp(0.42rem, 2.2vw, 0.52rem);
+@keyframes rune-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+.book__num {
+  font-size: 0.5rem;
   color: var(--gold);
 }
 
-.enchanted-book__hint {
-  font-size: 0.75rem;
+.book__hint {
+  font-size: 0.9rem;
   color: var(--text-muted);
-  margin-top: 0.15rem;
+  font-weight: 400;
 }
 
-.enchanted-book__page {
+.book__page {
+  display: block;
   overflow: hidden;
 }
 
-.enchanted-book__text {
-  padding-top: 1rem;
+.book__text {
+  display: block;
+  padding-top: 0.85rem;
   margin-top: 0.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 1.05rem;
-  font-style: italic;
-  color: var(--cream);
-}
-
-.enchanted-book--accent .enchanted-book__text {
-  color: var(--pink-soft);
+  font-size: clamp(1.1rem, 3.5vw, 1.25rem);
   font-weight: 500;
+  color: var(--cream);
+  line-height: 1.55;
 }
 
-@keyframes enchantPulse {
-  0%,
-  100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .enchanted-book__particles {
-    animation: none;
+@media (hover: hover) {
+  .book:hover {
+    border-color: rgba(196, 168, 232, 0.5);
+    transform: translateY(-2px);
   }
 }

@@ -1,0 +1,101 @@
+.cave__intro {
+  text-align: center;
+}
+
+.cave__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.cave__egg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 110px;
+  padding: 1rem 0.75rem;
+  border-radius: var(--radius);
+  background: rgba(12, 6, 24, 0.55);
+  border: 1px solid rgba(126, 232, 192, 0.18);
+  box-shadow: inset 0 0 30px rgba(78, 207, 154, 0.06);
+  transition: border-color 0.3s ease, background 0.3s ease;
+  overflow: hidden;
+}
+
+.cave__egg--found {
+  border-color: rgba(245, 199, 106, 0.45);
+  background: rgba(45, 27, 78, 0.5);
+}
+
+.cave__egg--chest {
+  grid-column: 1 / -1;
+  min-height: 120px;
+  border-color: rgba(245, 199, 106, 0.3);
+}
+
+.cave__emoji {
+  font-size: 1.75rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(126, 232, 192, 0.35));
+}
+
+.cave__label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+.cave__egg--found .cave__label {
+  color: var(--gold);
+}
+
+.cave__lid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28%;
+  background: linear-gradient(180deg, rgba(245, 199, 106, 0.25), transparent);
+  transform-origin: top center;
+  transition: transform 0.5s var(--ease-out), opacity 0.5s ease;
+}
+
+.cave__lid--open {
+  transform: rotateX(-70deg) translateY(-8px);
+  opacity: 0;
+}
+
+.cave__count {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.cave__toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--safe-bottom) + 5.5rem);
+  transform: translateX(-50%);
+  z-index: 50;
+  width: min(90vw, 340px);
+  padding: 0.95rem 1.15rem;
+  border-radius: var(--radius);
+  background: rgba(26, 16, 48, 0.92);
+  border: 1px solid rgba(245, 199, 106, 0.4);
+  box-shadow: var(--shadow-soft), var(--shadow-glow);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--cream);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (hover: hover) {
+  .cave__egg:hover:not(.cave__egg--found) {
+    border-color: rgba(126, 232, 192, 0.4);
+  }
+}

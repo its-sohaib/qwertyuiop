@@ -1,0 +1,35 @@
+.mute-toggle {
+  position: fixed;
+  top: calc(var(--safe-top) + 0.85rem);
+  right: calc(var(--safe-right) + 0.85rem);
+  z-index: 100;
+  width: var(--touch);
+  height: var(--touch);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(26, 16, 48, 0.55);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--cream);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s var(--ease-out), background 0.25s ease;
+}
+
+.mute-toggle:active {
+  transform: scale(0.94);
+}
+
+.mute-toggle__icon {
+  display: grid;
+  place-items: center;
+  opacity: 0.9;
+}
+
+@media (hover: hover) {
+  .mute-toggle:hover {
+    background: rgba(26, 16, 48, 0.75);
+    transform: scale(1.05);
+  }
+}

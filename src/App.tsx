@@ -1,19 +1,56 @@
-import { useState, useEffect } from 'react'
-import { AnimatePresence } from 'framer-motion'
-import { LayeredBackground } from './components/scenery/LayeredBackground'
-import { AmbientParticles } from './components/scenery/AmbientParticles'
-import { WorldGate } from './components/intro/WorldGate'
-import { HeroSection } from './components/sections/HeroSection'
-import { StorySection } from './components/sections/StorySection'
-import { WishesSection } from './components/sections/WishesSection'
-import { MemoriesSection } from './components/sections/MemoriesSection'
-import { AchievementsSection } from './components/sections/AchievementsSection'
-import { SecretsSection } from './components/sections/SecretsSection'
-import { FinaleSection } from './components/sections/FinaleSection'
+import { useState, useEffect, useCallback } from 'react'
+import { WorldSky } from './components/scenery/WorldSky'
+import { AmbientLife } from './components/scenery/AmbientLife'
+import { MuteToggle } from './components/audio/MuteToggle'
+import { HeroBiome } from './components/biomes/HeroBiome'
+import { CherryGrove } from './components/biomes/CherryGrove'
+import { FlowerForest } from './components/biomes/FlowerForest'
+import { EnchantedLibrary } from './components/biomes/EnchantedLibrary'
+import { AchievementValley } from './components/biomes/AchievementValley'
+import { HiddenCave } from './components/biomes/HiddenCave'
+import { NightSky } from './components/biomes/NightSky'
+import { useAudio } from './hooks/useAudio'
 import './App.css'
+
+type SkyPhase = 'hero' | 'day' | 'cave' | 'night'
+
+const PHASE_BY_ID: Record<string, SkyPhase> = {
+  hero: 'hero',
+  'cherry-grove': 'day',
+  'flower-forest': 'day',
+  'enchanted-library': 'day',
+  'achievement-valley': 'day',
+  'hidden-cave': 'cave',
+  'night-sky': 'night',
+}
+
+const AUDIO_BY_PHASE: Record<SkyPhase, 'day' | 'cave' | 'night'> = {
+  hero: 'day',
+  day: 'day',
+  cave: 'cave',
+  night: 'night',
+}
 
 function App() {
   const [started, setStarted] = useState(false)
+  const [phase, setPhase] = useState<SkyPhase>('hero')
+  const { muted, start, toggleMute, setMode } = useAudio()
+
+  const begin = useCallback(() => {
+    void start()
+    setStarted(true)
+  }, [start])
+
+  useEffect(() => {
+    if (!started) return
+    const t = window.setTimeout(() => {
+      const el = document.getElementById('cherry-grove')
+      if (!el) return
+      const top = el.getBoundingClientRect().top + window.scrollY
+      window.scrollTo({ top, behavior: 'smooth' })
+    }, 100)
+    return () => window.clearTimeout(t)
+  }, [started])
 
   useEffect(() => {
     document.body.style.overflow = started ? '' : 'hidden'
@@ -22,30 +59,63 @@ function App() {
     }
   }, [started])
 
-  function scrollToStory() {
-    document.getElementById('story')?.scrollIntoView({ behavior: 'smooth' })
-  }
+  useEffect(() => {
+    if (!started) return
+
+    const ids = Object.keys(PHASE_BY_ID)
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el))
+
+    const ratios = new Map<string, number>()
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          ratios.set(entry.target.id, entry.intersectionRatio)
+        }
+        let bestId = 'hero'
+        let bestRatio = 0
+        for (const [id, ratio] of ratios) {
+          if (ratio > bestRatio) {
+            bestRatio = ratio
+            bestId = id
+          }
+        }
+        const next = PHASE_BY_ID[bestId] ?? 'day'
+        setPhase(next)
+        setMode(AUDIO_BY_PHASE[next])
+      },
+      { threshold: [0.15, 0.35, 0.55, 0.75] },
+    )
+
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [started, setMode])
+
+  const ambientVariant =
+    phase === 'cave' ? 'cave' : phase === 'night' ? 'night' : phase === 'hero' ? 'petals' : 'default'
 
   return (
     <div className="app">
-      <LayeredBackground />
-      {started && <AmbientParticles />}
+      <WorldSky phase={phase} />
+      {/* Ambient always — hero feels alive before the gate opens */}
+      <AmbientLife variant={started ? ambientVariant : 'petals'} />
 
-      <AnimatePresence>
-        {!started && <WorldGate key="gate" onStart={() => setStarted(true)} />}
-      </AnimatePresence>
+      <MuteToggle muted={muted} onToggle={toggleMute} />
 
-      {started && (
-        <main className="app__journey">
-          <HeroSection onScrollDown={scrollToStory} />
-          <StorySection />
-          <WishesSection />
-          <MemoriesSection />
-          <AchievementsSection />
-          <SecretsSection />
-          <FinaleSection />
-        </main>
-      )}
+      <main className={`app__main ${started ? 'app__main--live' : 'app__main--gated'}`}>
+        <HeroBiome onBegin={begin} started={started} />
+
+        <div className={`app__journey ${started ? 'app__journey--visible' : ''}`} aria-hidden={!started}>
+          <CherryGrove />
+          <FlowerForest />
+          <EnchantedLibrary />
+          <AchievementValley />
+          <HiddenCave />
+          <NightSky />
+        </div>
+      </main>
     </div>
   )
 }

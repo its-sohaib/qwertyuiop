@@ -1,0 +1,50 @@
+.begin-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 228, 160, 0.22), rgba(255, 158, 181, 0.18));
+  border: 1px solid rgba(255, 228, 160, 0.45);
+  color: var(--cream);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 12px 40px rgba(12, 6, 24, 0.35),
+    0 0 32px rgba(245, 199, 106, 0.2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.begin-btn__glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(255, 228, 160, 0.25), transparent 55%);
+  animation: begin-pulse 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.begin-btn__label {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+@keyframes begin-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@media (hover: hover) {
+  .begin-btn:hover {
+    border-color: rgba(255, 228, 160, 0.7);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+      0 16px 48px rgba(12, 6, 24, 0.4),
+      0 0 48px rgba(245, 199, 106, 0.35);
+  }
+}

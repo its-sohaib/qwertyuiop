@@ -1,0 +1,49 @@
+.biome {
+  position: relative;
+  z-index: 2;
+  padding: var(--biome-pad);
+  min-height: min(100dvh, 900px);
+  display: flex;
+  align-items: center;
+}
+
+.biome__inner {
+  width: min(100%, 520px);
+  margin-inline: auto;
+}
+
+.biome__header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.biome__header .biome-title {
+  margin-top: 0.65rem;
+}
+
+.biome__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.biome--library {
+  min-height: auto;
+  padding-block: clamp(4rem, 10vh, 6rem);
+}
+
+.biome--cave {
+  min-height: auto;
+  padding-block: clamp(4.5rem, 12vh, 7rem);
+}
+
+.biome--night {
+  min-height: 100dvh;
+  padding-bottom: calc(var(--safe-bottom) + 4rem);
+}
+
+@media (min-width: 768px) {
+  .biome__inner {
+    width: min(100%, 640px);
+  }
+}

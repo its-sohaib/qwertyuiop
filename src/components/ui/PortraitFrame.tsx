@@ -5,30 +5,46 @@ import './PortraitFrame.css'
 type Props = {
   src: string
   alt: string
+  size?: 'hero' | 'biome'
 }
 
-export function PortraitFrame({ src, alt }: Props) {
+export function PortraitFrame({ src, alt, size = 'hero' }: Props) {
   const reduced = useReducedMotion()
 
   return (
     <motion.div
-      className="portrait-frame"
-      initial={reduced ? false : { opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+      className={`portrait portrait--${size}`}
+      initial={reduced ? false : { opacity: 0, scale: 0.94, y: 20 }}
+      animate={size === 'hero' ? { opacity: 1, scale: 1, y: 0 } : undefined}
+      whileInView={size === 'hero' ? undefined : { opacity: 1, scale: 1, y: 0 }}
+      viewport={size === 'hero' ? undefined : { once: true, margin: '-60px' }}
+      transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: size === 'hero' ? 0.15 : 0 }}
     >
-      <div className="portrait-frame__glow" aria-hidden="true" />
-      <div className="portrait-frame__corner portrait-frame__corner--tl" aria-hidden="true" />
-      <div className="portrait-frame__corner portrait-frame__corner--tr" aria-hidden="true" />
-      <div className="portrait-frame__corner portrait-frame__corner--bl" aria-hidden="true" />
-      <div className="portrait-frame__corner portrait-frame__corner--br" aria-hidden="true" />
-      <div className="portrait-frame__inner">
-        <img src={src} alt={alt} className="portrait-frame__img" width={400} height={500} />
-        <div className="portrait-frame__shine" aria-hidden="true" />
+      <div className="portrait__aura" aria-hidden="true" />
+      <div className="portrait__frame">
+        <div className="portrait__bevel" aria-hidden="true" />
+        <div className="portrait__inner">
+          <img
+            src={src}
+            alt={alt}
+            className="portrait__img"
+            width={400}
+            height={500}
+            loading={size === 'hero' ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+          <div className="portrait__shine" aria-hidden="true" />
+        </div>
+        <span className="portrait__corner portrait__corner--tl" aria-hidden="true" />
+        <span className="portrait__corner portrait__corner--tr" aria-hidden="true" />
+        <span className="portrait__corner portrait__corner--bl" aria-hidden="true" />
+        <span className="portrait__corner portrait__corner--br" aria-hidden="true" />
       </div>
-      <div className="portrait-frame__petals" aria-hidden="true">
-        <span /><span /><span />
-      </div>
+      {!reduced && (
+        <div className="portrait__hearts" aria-hidden="true">
+          <span /><span /><span />
+        </div>
+      )}
     </motion.div>
   )
 }

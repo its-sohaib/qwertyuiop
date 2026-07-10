@@ -1,0 +1,184 @@
+.world-sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 1.2s var(--ease-out);
+}
+
+.world-sky__gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -10%, #ff9a6b 0%, transparent 45%),
+    radial-gradient(ellipse 90% 60% at 80% 20%, #e8a0d8 0%, transparent 40%),
+    radial-gradient(ellipse 70% 50% at 15% 30%, #c4a8e8 0%, transparent 35%),
+    linear-gradient(180deg, #5c3d7a 0%, #3d2860 35%, #1a1030 70%, #0c0618 100%);
+  transition: opacity 1.4s ease, filter 1.4s ease;
+}
+
+.world-sky--cave .world-sky__gradient {
+  filter: brightness(0.45) saturate(0.7);
+}
+
+.world-sky--night .world-sky__gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 70% 10%, #4a2d6e 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 20% 20%, #2a1848 0%, transparent 45%),
+    linear-gradient(180deg, #1a1030 0%, #0f0820 40%, #080412 100%);
+}
+
+.world-sky__aurora {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    linear-gradient(115deg, transparent 20%, rgba(78, 207, 154, 0.12) 40%, transparent 55%),
+    linear-gradient(250deg, transparent 30%, rgba(196, 168, 232, 0.15) 50%, transparent 70%);
+  mix-blend-mode: screen;
+  transition: opacity 1.5s ease;
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+.world-sky--night .world-sky__aurora {
+  opacity: 1;
+}
+
+@keyframes aurora-drift {
+  from { transform: translateX(-4%) skewX(-2deg); }
+  to { transform: translateX(4%) skewX(2deg); }
+}
+
+.world-sky__sun {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  width: min(42vw, 220px);
+  height: min(42vw, 220px);
+  margin-left: calc(min(42vw, 220px) / -2);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 40%, #ffe4a0 0%, #ff8a5c 45%, transparent 70%);
+  filter: blur(2px);
+  opacity: 0.85;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.world-sky--night .world-sky__sun,
+.world-sky--cave .world-sky__sun {
+  opacity: 0;
+}
+
+.world-sky__clouds {
+  position: absolute;
+  inset: 0;
+}
+
+.world-sky__cloud {
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255, 246, 238, 0.14);
+  filter: blur(20px);
+  animation: cloud-drift linear infinite;
+}
+
+.world-sky__cloud--1 {
+  width: 55vw;
+  height: 12vw;
+  top: 18%;
+  left: -10%;
+  animation-duration: 80s;
+}
+
+.world-sky__cloud--2 {
+  width: 40vw;
+  height: 10vw;
+  top: 28%;
+  right: -5%;
+  animation-duration: 100s;
+  animation-direction: reverse;
+  opacity: 0.7;
+}
+
+.world-sky__cloud--3 {
+  width: 30vw;
+  height: 8vw;
+  top: 12%;
+  left: 40%;
+  animation-duration: 70s;
+  opacity: 0.5;
+}
+
+.world-sky__cloud--4 {
+  width: 48vw;
+  height: 11vw;
+  top: 40%;
+  left: 10%;
+  animation-duration: 90s;
+  opacity: 0.4;
+}
+
+@keyframes cloud-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(12vw); }
+}
+
+.world-sky--night .world-sky__clouds {
+  opacity: 0.25;
+}
+
+.world-sky__stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 20%, rgba(255, 246, 238, 0.9), transparent),
+    radial-gradient(1.5px 1.5px at 25% 45%, rgba(255, 246, 238, 0.7), transparent),
+    radial-gradient(2px 2px at 40% 15%, rgba(255, 228, 160, 0.9), transparent),
+    radial-gradient(1px 1px at 55% 35%, rgba(255, 246, 238, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 70% 22%, rgba(255, 246, 238, 0.85), transparent),
+    radial-gradient(1px 1px at 82% 50%, rgba(196, 168, 232, 0.8), transparent),
+    radial-gradient(2px 2px at 90% 18%, rgba(255, 228, 160, 0.9), transparent),
+    radial-gradient(1px 1px at 15% 60%, rgba(255, 246, 238, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 48% 55%, rgba(255, 246, 238, 0.7), transparent),
+    radial-gradient(1px 1px at 65% 70%, rgba(126, 232, 192, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 33% 75%, rgba(255, 246, 238, 0.6), transparent),
+    radial-gradient(1px 1px at 78% 80%, rgba(255, 246, 238, 0.45), transparent);
+  transition: opacity 1.5s ease;
+  animation: stars-twinkle 4s ease-in-out infinite alternate;
+}
+
+.world-sky--night .world-sky__stars {
+  opacity: 1;
+}
+
+@keyframes stars-twinkle {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+.world-sky__horizon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(12, 6, 24, 0.35) 50%, rgba(12, 6, 24, 0.65) 100%);
+}
+
+.world-sky__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 40%, transparent 40%, rgba(12, 6, 24, 0.55) 100%);
+}
+
+@media (min-width: 768px) {
+  .world-sky__sun {
+    top: 10%;
+    width: 260px;
+    height: 260px;
+    margin-left: -130px;
+  }
+}

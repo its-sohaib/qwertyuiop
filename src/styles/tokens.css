@@ -1,32 +1,45 @@
 :root {
-  /* Sunset → night palette */
-  --sunset-1: #ff8a5c;
-  --sunset-2: #ff6b8a;
-  --sunset-3: #e8a0d8;
-  --lavender: #b8a0dc;
-  --lavender-deep: #7b5ea7;
-  --night-1: #2d1b4e;
-  --night-2: #1a1030;
-  --night-3: #0f0820;
+  /* Warm sunset → deep night */
+  --sunset: #ff8a5c;
+  --sunset-deep: #e85d3a;
+  --pink: #ff9eb5;
+  --pink-soft: #ffc4d6;
+  --lavender: #c4a8e8;
+  --lavender-deep: #8b6bb8;
+  --sky-dusk: #5c3d7a;
+  --sky-night: #1a1030;
+  --sky-deep: #0c0618;
   --emerald: #4ecf9a;
-  --emerald-soft: #7ee8c0;
+  --emerald-glow: #7ee8c0;
   --gold: #f5c76a;
   --gold-glow: #ffe4a0;
-  --pink-soft: #ffc4d6;
-  --cream: #fff8f2;
-  --glass: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-strong: rgba(255, 255, 255, 0.14);
-  --text: #fff8f5;
-  --text-soft: rgba(255, 248, 245, 0.72);
-  --text-muted: rgba(255, 248, 245, 0.5);
-  --shadow-soft: 0 24px 80px rgba(15, 8, 32, 0.45);
-  --shadow-glow: 0 0 60px rgba(245, 199, 106, 0.25);
-  --radius-lg: 24px;
-  --radius-xl: 32px;
+  --lantern: #ffb347;
+  --cream: #fff6ee;
+  --cream-soft: rgba(255, 246, 238, 0.78);
+  --cream-muted: rgba(255, 246, 238, 0.5);
+
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-strong: rgba(255, 255, 255, 0.12);
+
+  --text: var(--cream);
+  --text-soft: var(--cream-soft);
+  --text-muted: var(--cream-muted);
+
+  --shadow-soft: 0 20px 60px rgba(12, 6, 24, 0.5);
+  --shadow-glow: 0 0 48px rgba(245, 199, 106, 0.28);
+  --radius: 20px;
+  --radius-lg: 28px;
+
   --font-pixel: 'Press Start 2P', monospace;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --section-pad: clamp(4rem, 12vw, 7rem);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  --biome-pad: clamp(5rem, 14vh, 8rem) clamp(1.25rem, 5vw, 2rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --touch: 48px;
 }

@@ -1,147 +1,131 @@
-.portrait-frame {
+.portrait {
   position: relative;
-  width: min(88vw, 320px);
-  margin: 0 auto;
+  width: min(48vw, 190px);
+  margin-inline: auto;
 }
 
-.portrait-frame__glow {
+.portrait--biome {
+  width: min(62vw, 240px);
+}
+
+.portrait__aura {
   position: absolute;
-  inset: -20%;
-  background: radial-gradient(ellipse, rgba(245, 199, 106, 0.25) 0%, rgba(232, 107, 138, 0.15) 40%, transparent 70%);
-  filter: blur(20px);
-  animation: portraitGlow 5s ease-in-out infinite alternate;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 179, 71, 0.35) 0%, rgba(255, 158, 181, 0.15) 40%, transparent 70%);
+  filter: blur(8px);
+  animation: aura-breathe 5s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.portrait-frame__inner {
+@keyframes aura-breathe {
+  0%, 100% { opacity: 0.7; transform: scale(0.96); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+.portrait__frame {
   position: relative;
   padding: 10px;
-  border-radius: var(--radius-xl);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border: 2px solid rgba(245, 199, 106, 0.35);
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(255, 228, 160, 0.55), rgba(196, 168, 232, 0.35) 50%, rgba(255, 138, 92, 0.4));
   box-shadow:
     var(--shadow-soft),
-    var(--shadow-glow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  overflow: hidden;
+    0 0 40px rgba(245, 199, 106, 0.25);
 }
 
-.portrait-frame__img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center 18%;
-  border-radius: calc(var(--radius-xl) - 8px);
-}
-
-.portrait-frame__shine {
+.portrait__bevel {
   position: absolute;
-  inset: 10px;
-  border-radius: calc(var(--radius-xl) - 8px);
+  inset: 4px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 246, 238, 0.25);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.portrait__inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  aspect-ratio: 4 / 5;
+  background: var(--sky-deep);
+}
+
+.portrait__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.portrait__shine {
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    transparent 40%,
+    125deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 35%,
     transparent 60%,
-    rgba(255, 200, 150, 0.08) 100%
+    rgba(255, 179, 71, 0.08) 100%
   );
   pointer-events: none;
 }
 
-.portrait-frame__corner {
+.portrait__corner {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--gold);
-  opacity: 0.6;
-  z-index: 2;
+  width: 14px;
+  height: 14px;
+  z-index: 3;
+  border-color: var(--gold-glow);
+  border-style: solid;
+  opacity: 0.85;
 }
 
-.portrait-frame__corner--tl {
-  top: 4px;
-  left: 4px;
-  border-right: none;
-  border-bottom: none;
-  border-radius: 4px 0 0 0;
-}
+.portrait__corner--tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
+.portrait__corner--tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+.portrait__corner--bl { bottom: 6px; left: 6px; border-width: 0 0 2px 2px; }
+.portrait__corner--br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
 
-.portrait-frame__corner--tr {
-  top: 4px;
-  right: 4px;
-  border-left: none;
-  border-bottom: none;
-  border-radius: 0 4px 0 0;
-}
-
-.portrait-frame__corner--bl {
-  bottom: 4px;
-  left: 4px;
-  border-right: none;
-  border-top: none;
-  border-radius: 0 0 0 4px;
-}
-
-.portrait-frame__corner--br {
-  bottom: 4px;
-  right: 4px;
-  border-left: none;
-  border-top: none;
-  border-radius: 0 0 4px 0;
-}
-
-.portrait-frame__petals span {
+.portrait__hearts span {
   position: absolute;
   width: 8px;
   height: 8px;
-  background: var(--pink-soft);
-  border-radius: 50% 0 50% 0;
-  opacity: 0.5;
-  animation: petalFloat 6s ease-in-out infinite;
+  background: var(--pink);
+  opacity: 0;
+  transform: rotate(-45deg);
+  animation: float-heart 6s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.portrait-frame__petals span:nth-child(1) {
-  top: 10%;
-  left: -4%;
-  animation-delay: 0s;
+.portrait__hearts span::before,
+.portrait__hearts span::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: inherit;
 }
 
-.portrait-frame__petals span:nth-child(2) {
-  top: 60%;
-  right: -6%;
-  animation-delay: 2s;
-  background: var(--lavender);
+.portrait__hearts span::before { top: -4px; left: 0; }
+.portrait__hearts span::after { top: 0; left: -4px; }
+
+.portrait__hearts span:nth-child(1) { top: 12%; right: -4%; animation-delay: 0s; }
+.portrait__hearts span:nth-child(2) { top: 40%; left: -6%; animation-delay: 2s; width: 6px; height: 6px; }
+.portrait__hearts span:nth-child(3) { bottom: 18%; right: 2%; animation-delay: 3.5s; width: 7px; height: 7px; }
+
+@keyframes float-heart {
+  0%, 100% { opacity: 0; transform: rotate(-45deg) translateY(8px); }
+  20% { opacity: 0.7; }
+  60% { opacity: 0.4; transform: rotate(-45deg) translateY(-24px); }
+  100% { opacity: 0; transform: rotate(-45deg) translateY(-40px); }
 }
 
-.portrait-frame__petals span:nth-child(3) {
-  bottom: 15%;
-  left: 5%;
-  animation-delay: 4s;
-}
-
-@keyframes portraitGlow {
-  from {
-    opacity: 0.7;
-    transform: scale(0.98);
+@media (min-width: 768px) {
+  .portrait--hero {
+    width: min(34vw, 300px);
   }
-  to {
-    opacity: 1;
-    transform: scale(1.02);
-  }
-}
-
-@keyframes petalFloat {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(15deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .portrait-frame__glow,
-  .portrait-frame__petals span {
-    animation: none;
+  .portrait--biome {
+    width: min(30vw, 280px);
   }
 }

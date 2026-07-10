@@ -1,0 +1,104 @@
+.flower-forest {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.flower-forest__bee {
+  position: absolute;
+  z-index: 3;
+  font-size: 1.1rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+}
+
+.flower-forest__bloom {
+  text-align: center;
+}
+
+.flower-forest__text {
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.flower-forest__text--soft {
+  font-weight: 400;
+  color: var(--text-soft);
+  margin-top: 0.35rem;
+}
+
+.flower-forest__field {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  max-width: 280px;
+  padding: 0.5rem 0;
+}
+
+.flower-forest__flower {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: hsl(var(--hue, 340) 70% 72%);
+  box-shadow:
+    0 0 0 3px hsl(var(--hue, 340) 60% 85% / 0.35),
+    0 0 12px hsl(var(--hue, 340) 70% 60% / 0.4);
+  animation: flower-bob 3s ease-in-out infinite;
+}
+
+@keyframes flower-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.flower-forest__strip {
+  display: flex;
+  gap: 0.65rem;
+  width: 100%;
+  overflow-x: auto;
+  padding: 0.25rem 0.15rem 0.5rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.flower-forest__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.flower-forest__snap {
+  flex: 0 0 auto;
+  width: 42%;
+  max-width: 150px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  scroll-snap-align: start;
+  box-shadow: 0 12px 28px rgba(12, 6, 24, 0.35);
+}
+
+.flower-forest__memory {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.flower-forest__shot {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: var(--shadow-soft);
+}
+
+.flower-forest__caption {
+  margin-top: 0.65rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}

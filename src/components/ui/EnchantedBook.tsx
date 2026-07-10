@@ -1,52 +1,57 @@
-import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { useAudio } from '../../hooks/useAudio'
 import './EnchantedBook.css'
 
 type Props = {
-  title: string
+  index: number
   text: string
   delay?: number
-  accent?: boolean
 }
 
-export function EnchantedBook({ title, text, delay = 0, accent }: Props) {
+export function EnchantedBook({ index, text, delay = 0 }: Props) {
   const [open, setOpen] = useState(false)
   const reduced = useReducedMotion()
+  const { playSparkle } = useAudio()
+
+  function toggle() {
+    setOpen((v) => {
+      if (!v) playSparkle()
+      return !v
+    })
+  }
 
   return (
-    <motion.div
-      className={`enchanted-book ${open ? 'enchanted-book--open' : ''} ${accent ? 'enchanted-book--accent' : ''}`}
-      initial={reduced ? false : { opacity: 0, y: 24 }}
+    <motion.button
+      type="button"
+      className={`book ${open ? 'book--open' : ''}`}
+      initial={reduced ? false : { opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      onClick={() => setOpen((v) => !v)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          setOpen((v) => !v)
-        }
-      }}
-      role="button"
-      tabIndex={0}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      onClick={toggle}
       aria-expanded={open}
     >
-      <div className="enchanted-book__particles" aria-hidden="true" />
-      <div className="enchanted-book__spine" aria-hidden="true" />
-      <div className="enchanted-book__cover">
-        <span className="enchanted-book__emoji" aria-hidden="true">📖</span>
-        <span className="enchanted-book__title pixel-title">{title}</span>
-        {!open && <span className="enchanted-book__hint">tap to open</span>}
-      </div>
-      <motion.div
-        className="enchanted-book__page"
-        initial={false}
-        animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <p className="enchanted-book__text body-text">{text}</p>
-      </motion.div>
-    </motion.div>
+      <span className="book__glow" aria-hidden="true" />
+      <span className="book__cover">
+        <span className="book__rune" aria-hidden="true">✦</span>
+        <span className="book__num pixel-heading">page {index}</span>
+        {!open && <span className="book__hint">tap to open</span>}
+      </span>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.span
+            className="book__page"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="book__text">{text}</span>
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
   )
 }
